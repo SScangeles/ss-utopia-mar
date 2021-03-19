@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ss.utopia.console;
+package com.ss.utopia.main;
 
 /**
  * @author Christian Angeles

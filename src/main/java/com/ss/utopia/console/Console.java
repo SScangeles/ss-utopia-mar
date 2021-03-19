@@ -5,7 +5,7 @@ package com.ss.utopia.console;
 
 import java.util.Scanner;
 
-import com.ss.utopia.entity.Airplane;
+import com.ss.utopia.main.Menu;
 
 /**
  * @author Christian Angeles
