@@ -17,7 +17,7 @@ public class ServiceUtil {
 	private final String username;
 	private final String password;
 	
-	protected ServiceUtil() {
+	public ServiceUtil() {
 		driver = "com.mysql.cj.jdbc.Driver";
 		url = "jdbc:mysql://localhost:3306/utopia";
 		username = "root";
@@ -29,7 +29,7 @@ public class ServiceUtil {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	protected Connection getConnection() throws ClassNotFoundException, SQLException {
+	public Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName(driver);
 		Connection connection = DriverManager.getConnection(url, username, password);
 		connection.setAutoCommit(Boolean.FALSE);

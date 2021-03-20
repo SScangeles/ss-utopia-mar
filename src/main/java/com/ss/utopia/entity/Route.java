@@ -9,8 +9,8 @@ package com.ss.utopia.entity;
  */
 public class Route {
 	private Integer routeID;
-	private String originAirportID;
-	private String destAirPortID;
+	private Airport originAirportID;
+	private Airport destAirPortID;
 	/**
 	 * @return the routeID
 	 */
@@ -26,25 +26,25 @@ public class Route {
 	/**
 	 * @return the originAirportID
 	 */
-	public String getOriginAirportID() {
+	public Airport getOriginAirportID() {
 		return originAirportID;
 	}
 	/**
 	 * @param originAirportID the originAirportID to set
 	 */
-	public void setOriginAirportID(String originAirportID) {
+	public void setOriginAirportID(Airport originAirportID) {
 		this.originAirportID = originAirportID;
 	}
 	/**
 	 * @return the destAirPortID
 	 */
-	public String getDestAirPortID() {
+	public Airport getDestAirPortID() {
 		return destAirPortID;
 	}
 	/**
 	 * @param destAirPortID the destAirPortID to set
 	 */
-	public void setDestAirPortID(String destAirPortID) {
+	public void setDestAirPortID(Airport destAirPortID) {
 		this.destAirPortID = destAirPortID;
 	}
 	

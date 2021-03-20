@@ -5,6 +5,7 @@ package com.ss.utopia.services;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ss.utopia.dao.FlightDAO;
@@ -23,15 +24,25 @@ public class EmployeeService {
 		connection = null;
 	}
 	
-	public List<Flight> getFlights() throws ClassNotFoundException, SQLException {
+	public List<Flight> getAllFlight() throws SQLException {
 		try {
 			connection = serviceUtil.getConnection();
 			FlightDAO flightdao = new FlightDAO(connection);
 			
-			return null;
+			connection.commit();
+			return flightdao.getAllFlight();
+		}
+		catch(Exception e) {
+			System.out.println("Exception: "+e.getMessage());
+			if(connection != null) {
+				connection.rollback();
+			}
+			return new ArrayList<Flight>();
 		}
 		finally {
-			connection.close();
+			if(connection != null) {
+				connection.close();
+			}
 		}
 	}
 	

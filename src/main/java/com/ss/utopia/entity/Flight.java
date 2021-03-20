@@ -3,7 +3,7 @@
  */
 package com.ss.utopia.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author Christian Angeles
@@ -13,7 +13,7 @@ public class Flight {
 	private Integer flightID;
 	private Route routeID;
 	private Airplane airplaneID;
-	private Date departureTime;
+	private Timestamp departureTime;
 	private Integer reservedSeats;
 	private Float seatPrice;
 	/**
@@ -55,13 +55,13 @@ public class Flight {
 	/**
 	 * @return the departureTime
 	 */
-	public Date getDepartureTime() {
+	public Timestamp getDepartureTime() {
 		return departureTime;
 	}
 	/**
 	 * @param departureTime the departureTime to set
 	 */
-	public void setDepartureTime(Date departureTime) {
+	public void setDepartureTime(Timestamp departureTime) {
 		this.departureTime = departureTime;
 	}
 	/**
