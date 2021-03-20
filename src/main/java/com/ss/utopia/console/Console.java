@@ -27,13 +27,8 @@ public class Console {
 		case 1:
 			//employee
 			EmployeeService emp = new EmployeeService();
-			try {
-				List<Flight> flights = emp.getAllFlight();
-				System.out.println(flights);
-			}
-			catch(SQLException sqle) {
-				System.out.println("SQLException: "+sqle.getMessage());
-			}
+			List<Flight> flights = emp.getAllFlight();
+			System.out.println(flights);
 			break;
 		case 2:
 			//admin

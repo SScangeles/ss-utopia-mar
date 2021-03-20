@@ -24,24 +24,29 @@ public class EmployeeService {
 		connection = null;
 	}
 	
-	public List<Flight> getAllFlight() throws SQLException {
+	public List<Flight> getAllFlight() {
 		try {
 			connection = serviceUtil.getConnection();
 			FlightDAO flightdao = new FlightDAO(connection);
 			
-			connection.commit();
 			return flightdao.getAllFlight();
 		}
-		catch(Exception e) {
-			System.out.println("Exception: "+e.getMessage());
-			if(connection != null) {
-				connection.rollback();
-			}
+		catch(ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
+			return new ArrayList<Flight>();
+		}
+		catch(SQLException sqle) {
+			System.out.println("SQLException: "+sqle.getMessage());
 			return new ArrayList<Flight>();
 		}
 		finally {
 			if(connection != null) {
-				connection.close();
+				try {
+					connection.close();
+				}
+				catch(SQLException sqle) {
+					System.out.println("SQLException: "+sqle.getMessage());
+				}
 			}
 		}
 	}
