@@ -21,7 +21,7 @@ public class AirplaneBuilder {
 		airplane = new Airplane();
 	}
 	
-	public Airplane buildAirplane() throws ClassNotFoundException, SQLException {
+	public Airplane buildAirplane() throws SQLException {
 		airplaneType.setAirplaneTypeID(qresult.getInt("type_id"));
 		airplaneType.setMaxCap(qresult.getInt("max_capacity"));
 		

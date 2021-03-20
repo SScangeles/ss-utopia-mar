@@ -19,7 +19,7 @@ public class FlightBuilder {
 		flight = new Flight();
 	}
 	
-	public Flight buildFlight() throws ClassNotFoundException, SQLException {
+	public Flight buildFlight() throws SQLException {
 		flight.setFlightID(qresult.getInt("id"));
 		flight.setRouteID(new RouteBuilder(qresult).buildRoute());
 		flight.setAirplaneID(new AirplaneBuilder(qresult).buildAirplane());

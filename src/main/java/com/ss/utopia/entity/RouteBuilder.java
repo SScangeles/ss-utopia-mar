@@ -24,7 +24,7 @@ public class RouteBuilder {
 	}
 	
 
-	public Route buildRoute() throws ClassNotFoundException, SQLException {
+	public Route buildRoute() throws SQLException {
 		airportOrg.setAirportID(qresult.getString("origin_id"));
 		airportOrg.setCity(qresult.getString("origin_city"));
 		airportDest.setAirportID(qresult.getString("destination_id"));

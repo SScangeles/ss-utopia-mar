@@ -20,7 +20,7 @@ public abstract class BaseDAO<T> {
 		this.connection = connection;
 	}
 	
-	public void saveData(String sql, Object[] objVals) throws ClassNotFoundException, SQLException {
+	public void saveData(String sql, Object[] objVals) throws SQLException {
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		if(objVals != null) {
 			int count = 1;
@@ -32,7 +32,7 @@ public abstract class BaseDAO<T> {
 		prepStmt.executeUpdate();
 	}
 	
-	public List<T> readData(String sql, Object[] objVals) throws ClassNotFoundException, SQLException {
+	public List<T> readData(String sql, Object[] objVals) throws SQLException {
 		PreparedStatement prepStmt = connection.prepareStatement(sql);
 		if(objVals != null) {
 			int count = 1;
@@ -42,8 +42,11 @@ public abstract class BaseDAO<T> {
 			}
 		}
 		ResultSet qresult = prepStmt.executeQuery();
-		return getData(qresult);
+		return getList(qresult);
 	}
-	
-	public abstract List<T> getData(ResultSet qresult) throws ClassNotFoundException, SQLException;
+
+	public abstract List<T> getList(ResultSet qresult) throws SQLException;
+	public abstract void insert(T obj) throws SQLException;
+	public abstract void delete(T obj) throws SQLException;
+	public abstract void update(T obj) throws SQLException;
 }

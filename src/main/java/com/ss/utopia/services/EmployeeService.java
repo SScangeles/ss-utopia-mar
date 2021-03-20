@@ -23,20 +23,23 @@ public class EmployeeService {
 		serviceUtil = new ServiceUtil();
 		connection = null;
 	}
-	
-	public List<Flight> getAllFlight() {
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Flight> getFlights() {
 		try {
 			connection = serviceUtil.getConnection();
 			FlightDAO flightdao = new FlightDAO(connection);
 			
 			return flightdao.getAllFlight();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
+		catch(ClassNotFoundException cnfEx) {
+			System.out.println("ClassNotFoundException: "+cnfEx.getMessage());
 			return new ArrayList<Flight>();
 		}
-		catch(SQLException sqle) {
-			System.out.println("SQLException: "+sqle.getMessage());
+		catch(SQLException connEx) {
+			System.out.println("SQLException: "+connEx.getMessage());
 			return new ArrayList<Flight>();
 		}
 		finally {
@@ -44,11 +47,43 @@ public class EmployeeService {
 				try {
 					connection.close();
 				}
-				catch(SQLException sqle) {
-					System.out.println("SQLException: "+sqle.getMessage());
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
 				}
 			}
 		}
 	}
-	
+
+	public void updateFlight(Flight flight) {
+		try {
+			connection = serviceUtil.getConnection();
+			FlightDAO flightdao = new FlightDAO(connection);
+			flightdao.update(flight);
+			connection.commit();
+		}
+		catch(ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
+		}
+		catch(SQLException connEx) {
+			System.out.println("SQLException: "+connEx.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
 }

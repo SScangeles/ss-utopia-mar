@@ -20,9 +20,45 @@ public class FlightDAO extends BaseDAO<Flight> {
 
 	public FlightDAO(Connection connection) {
 		super(connection);
+		// TODO Auto-generated constructor stub
 	}
 	
-	public List<Flight> getFlightByID(Integer flightID) throws ClassNotFoundException, SQLException {
+	@Override
+	public List<Flight> getList(ResultSet qresult) throws SQLException {
+		List<Flight> flights = new ArrayList<>();
+		while(qresult.next()) {
+			flights.add(new FlightBuilder(qresult).buildFlight());
+		}
+		return flights;
+	}
+
+	@Override
+	public void insert(Flight flight) throws SQLException  {
+		saveData("insert into flight(id, route_id, airplane_id, departure_time)\r\n"
+				+ "values (?, ?, ?, ?);", 
+				new Object[] {flight.getFlightID(), flight.getRouteID(), flight.getAirplaneID(), flight.getDepartureTime()});
+	}
+
+	@Override
+	public void delete(Flight flight) throws SQLException  {
+		saveData("delete from flight where flight.id = ?", 
+				new Object[] {flight.getFlightID()});
+	}
+
+	@Override
+	public void update(Flight flight) throws SQLException  {
+		saveData("set foreign_key_checks = 0;\r\n"
+				+ "update flight \r\n"
+				+ "set \r\n"
+				+ "flight.route_id = ?,\r\n"
+				+ "flight.airplane_id = ?,\r\n"
+				+ "flight.departure_time = ?\r\n"
+				+ "where flight.id = 1;\r\n"
+				+ "set foreign_key_checks = 1;", 
+				new Object[] {flight.getRouteID(), flight.getAirplaneID(), flight.getDepartureTime(), flight.getFlightID()});
+	}
+	
+	public List<Flight> getFlightByID(Integer flightID) throws SQLException {
 		return readData("select \r\n"
 				+ "flight.*,\r\n"
 				+ "rt.destination_id,\r\n"
@@ -47,10 +83,11 @@ public class FlightDAO extends BaseDAO<Flight> {
 				+ "inner join\r\n"
 				+ "(select * from airplane_type) as a_t\r\n"
 				+ "on a.type_id = a_t.id\r\n"
-				+ "where flight.id = ?", new Object[] {flightID.intValue()});
+				+ "where flight.id = ?", 
+				new Object[] {flightID});
 	}
 	
-	public List<Flight> getAllFlight() throws ClassNotFoundException, SQLException {
+	public List<Flight> getAllFlight() throws SQLException {
 		return readData("select \r\n"
 				+ "flight.*,\r\n"
 				+ "rt.destination_id,\r\n"
@@ -74,16 +111,7 @@ public class FlightDAO extends BaseDAO<Flight> {
 				+ "on flight.airplane_id = a.id\r\n"
 				+ "inner join\r\n"
 				+ "(select * from airplane_type) as a_t\r\n"
-				+ "on a.type_id = a_t.id\r\n", null);
+				+ "on a.type_id = a_t.id", 
+				null);
 	}
-
-	@Override
-	public List<Flight> getData(ResultSet qresult) throws ClassNotFoundException, SQLException {
-		List<Flight> flights = new ArrayList<>();
-		while(qresult.next()) {
-			flights.add(new FlightBuilder(qresult).buildFlight());
-		}
-		return flights;
-	}
-	
 }
