@@ -8,30 +8,30 @@ package com.ss.utopia.entity;
  *
  */
 public class BookingAgent {
-	private Booking bookingID;
-	private User agentID;
+	private Integer bookingID;
+	private Integer agentID;
 	/**
 	 * @return the bookingID
 	 */
-	public Booking getBookingID() {
+	public Integer getBookingID() {
 		return bookingID;
 	}
 	/**
 	 * @param bookingID the bookingID to set
 	 */
-	public void setBookingID(Booking bookingID) {
+	public void setBookingID(Integer bookingID) {
 		this.bookingID = bookingID;
 	}
 	/**
 	 * @return the agentID
 	 */
-	public User getAgentID() {
+	public Integer getAgentID() {
 		return agentID;
 	}
 	/**
 	 * @param agentID the agentID to set
 	 */
-	public void setAgentID(User agentID) {
+	public void setAgentID(Integer agentID) {
 		this.agentID = agentID;
 	}
 	
