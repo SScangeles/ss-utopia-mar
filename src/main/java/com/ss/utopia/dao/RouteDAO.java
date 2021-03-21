@@ -38,7 +38,8 @@ public class RouteDAO extends BaseDAO<Route> {
 				+ "insert into route(id, origin_id, destination_id)\r\n"
 				+ "values (?, ?, ?);"
 				+ "set foreign_key_checks = 1;\r\n", 
-				new Object[] {route.getRouteID(), route.getOriginAirportID(), route.getDestAirportID()});
+				new Object[] {route.getRouteID(), route.getOriginAirportID().getAirportID(), 
+						route.getDestAirportID().getAirportID()});
 	}
 
 	@Override
@@ -56,7 +57,8 @@ public class RouteDAO extends BaseDAO<Route> {
 				+ "route.destination_id = ?,\r\n"
 				+ "where route.id = ?;\r\n"
 				+ "set foreign_key_checks = 1;", 
-				new Object[] {route.getOriginAirportID(), route.getDestAirportID(), route.getRouteID()});
+				new Object[] {route.getOriginAirportID().getAirportID(), route.getDestAirportID().getAirportID(), 
+						route.getRouteID()});
 	}
 	
 	public List<Route> getAllRoute() throws SQLException {
@@ -71,8 +73,7 @@ public class RouteDAO extends BaseDAO<Route> {
 				+ "on route.origin_id = a_origin.iata_id\r\n"
 				+ "inner join\r\n"
 				+ "(select * from airport) as a_dest\r\n"
-				+ "on route.destination_id = a_dest.iata_id", 
-				null);
+				+ "on route.destination_id = a_dest.iata_id", null);
 	}
 
 }

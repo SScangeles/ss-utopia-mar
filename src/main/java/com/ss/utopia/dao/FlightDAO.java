@@ -38,7 +38,8 @@ public class FlightDAO extends BaseDAO<Flight> {
 				+ "insert into flight(id, route_id, airplane_id, departure_time)\r\n"
 				+ "values (?, ?, ?, ?);"
 				+ "set foreign_key_checks = 1;\r\n", 
-				new Object[] {flight.getFlightID(), flight.getRouteID(), flight.getAirplaneID(), flight.getDepartureTime()});
+				new Object[] {flight.getFlightID(), flight.getRouteID().getRouteID(), 
+						flight.getAirplaneID().getAirplaneID(), flight.getDepartureTime()});
 	}
 
 	@Override
@@ -57,7 +58,8 @@ public class FlightDAO extends BaseDAO<Flight> {
 				+ "flight.departure_time = ?\r\n"
 				+ "where flight.id = ?;\r\n"
 				+ "set foreign_key_checks = 1;", 
-				new Object[] {flight.getRouteID(), flight.getAirplaneID(), flight.getDepartureTime(), flight.getFlightID()});
+				new Object[] {flight.getRouteID().getRouteID(), flight.getAirplaneID().getAirplaneID(), 
+						flight.getDepartureTime(), flight.getFlightID()});
 	}
 	
 	public List<Flight> getAllFlight() throws SQLException {
@@ -85,7 +87,6 @@ public class FlightDAO extends BaseDAO<Flight> {
 				+ "on flight.airplane_id = a.id\r\n"
 				+ "inner join\r\n"
 				+ "(select * from airplane_type) as a_t\r\n"
-				+ "on a.type_id = a_t.id", 
-				null);
+				+ "on a.type_id = a_t.id", null);
 	}
 }

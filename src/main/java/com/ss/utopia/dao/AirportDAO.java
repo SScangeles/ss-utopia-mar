@@ -25,13 +25,13 @@ public class AirportDAO extends BaseDAO<Airport> {
 
 	@Override
 	public List<Airport> getList(ResultSet qresult) throws SQLException {
-		List<Airport> Types = new ArrayList<>();
+		List<Airport> airports = new ArrayList<>();
 		while(qresult.next()) {
 			Airport airport = new Airport();
 			airport.setAirportID(qresult.getString("iata_id"));
 			airport.setCity(qresult.getString("city"));
 		}
-		return Types;
+		return airports;
 	}
 
 	@Override

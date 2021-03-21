@@ -8,30 +8,30 @@ package com.ss.utopia.entity;
  *
  */
 public class FlightBookings {
-	private Flight flightID;
-	private Booking bookingID;
+	private Integer flightID;
+	private Integer bookingID;
 	/**
 	 * @return the flightID
 	 */
-	public Flight getFlightID() {
+	public Integer getFlightID() {
 		return flightID;
 	}
 	/**
 	 * @param flightID the flightID to set
 	 */
-	public void setFlightID(Flight flightID) {
+	public void setFlightID(Integer flightID) {
 		this.flightID = flightID;
 	}
 	/**
 	 * @return the bookingID
 	 */
-	public Booking getBookingID() {
+	public Integer getBookingID() {
 		return bookingID;
 	}
 	/**
 	 * @param bookingID the bookingID to set
 	 */
-	public void setBookingID(Booking bookingID) {
+	public void setBookingID(Integer bookingID) {
 		this.bookingID = bookingID;
 	}
 	

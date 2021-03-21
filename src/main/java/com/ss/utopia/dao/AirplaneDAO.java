@@ -38,7 +38,7 @@ public class AirplaneDAO extends BaseDAO<Airplane> {
 				+ "insert into airplane(id, type_id)\r\n"
 				+ "values (?, ?);"
 				+ "set foreign_key_checks = 1;\r\n", 
-				new Object[] {airplane.getAirplaneID(), airplane.getAirplaneTypeID()});
+				new Object[] {airplane.getAirplaneID(), airplane.getAirplaneTypeID().getAirplaneTypeID()});
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class AirplaneDAO extends BaseDAO<Airplane> {
 				+ "airplane.type_id = ?,\r\n"
 				+ "where airplane.id = ?;\r\n"
 				+ "set foreign_key_checks = 1;", 
-				new Object[] {airplane.getAirplaneTypeID(), airplane.getAirplaneID()});
+				new Object[] {airplane.getAirplaneTypeID().getAirplaneTypeID(), airplane.getAirplaneID()});
 	}
 	
 	public List<Airplane> getAllAirplane() throws SQLException {
@@ -66,8 +66,6 @@ public class AirplaneDAO extends BaseDAO<Airplane> {
 				+ "from airplane\r\n"
 				+ "inner join\r\n"
 				+ "(select * from airplane_type) as a_t\r\n"
-				+ "on airplane.type_id = a_t.id", 
-				null);
+				+ "on airplane.type_id = a_t.id", null);
 	}
-
 }

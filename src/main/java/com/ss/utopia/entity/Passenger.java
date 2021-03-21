@@ -3,7 +3,7 @@
  */
 package com.ss.utopia.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author Christian Angeles
@@ -14,7 +14,7 @@ public class Passenger {
 	private Booking bookingID;
 	private String givenName;
 	private String familyName;
-	private Date dob;
+	private Timestamp dob;
 	private String gender;
 	private String address;
 	/**
@@ -68,13 +68,13 @@ public class Passenger {
 	/**
 	 * @return the dob
 	 */
-	public Date getDob() {
+	public Timestamp getDob() {
 		return dob;
 	}
 	/**
 	 * @param dob the dob to set
 	 */
-	public void setDob(Date dob) {
+	public void setDob(Timestamp dob) {
 		this.dob = dob;
 	}
 	/**
