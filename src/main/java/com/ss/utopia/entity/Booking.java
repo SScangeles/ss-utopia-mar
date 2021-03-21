@@ -47,5 +47,4 @@ public class Booking {
 	public void setConfirmCode(String confirmCode) {
 		this.confirmCode = confirmCode;
 	}
-	
 }

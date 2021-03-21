@@ -27,7 +27,7 @@ public class Console {
 		case 1:
 			//employee
 			EmployeeService emp = new EmployeeService();
-			List<Flight> flights = emp.getFlights();
+			List<Flight> flights = emp.getFlight();
 			System.out.println(flights);
 			break;
 		case 2:

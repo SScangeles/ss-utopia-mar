@@ -34,5 +34,4 @@ public class AirplaneType {
 	public void setMaxCap(Integer maxCap) {
 		this.maxCap = maxCap;
 	}
-	
 }

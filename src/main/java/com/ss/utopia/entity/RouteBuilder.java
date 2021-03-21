@@ -32,7 +32,7 @@ public class RouteBuilder {
 		
 		route.setRouteID(qresult.getInt("route_id"));
 		route.setOriginAirportID(airportOrg);
-		route.setDestAirPortID(airportDest);
+		route.setDestAirportID(airportDest);
 		
 		return route;
 	}

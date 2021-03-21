@@ -34,6 +34,4 @@ public class Airplane {
 	public void setAirplaneTypeID(AirplaneType airplaneTypeID) {
 		this.airplaneTypeID = airplaneTypeID;
 	}
-	
-	
 }
