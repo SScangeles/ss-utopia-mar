@@ -172,7 +172,7 @@ public class Console {
 				}
 				break;
 			case 'q': //quit utopia
-				System.out.println("Closing Utopia");
+				System.out.println("End Utopia");
 				utopia = false;
 				break;
 			default:

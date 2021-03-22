@@ -48,12 +48,8 @@ public class Service {
 			
 			return flightdao.getAllFlight();
 		}
-		catch(ClassNotFoundException cnfEx) {
-			System.out.println("ClassNotFoundException: "+cnfEx.getMessage());
-			return new ArrayList<>();
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			return new ArrayList<>();
 		}
 		finally {
@@ -75,12 +71,8 @@ public class Service {
 			
 			return flightdao.getFlightByID(flight);
 		}
-		catch(ClassNotFoundException cnfEx) {
-			System.out.println("ClassNotFoundException: "+cnfEx.getMessage());
-			return new ArrayList<>();
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			return new ArrayList<>();
 		}
 		finally {
@@ -102,12 +94,8 @@ public class Service {
 			
 			return flightdao.getFlightByUserID(userID);
 		}
-		catch(ClassNotFoundException cnfEx) {
-			System.out.println("ClassNotFoundException: "+cnfEx.getMessage());
-			return new ArrayList<>();
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			return new ArrayList<>();
 		}
 		finally {
@@ -129,11 +117,8 @@ public class Service {
 			flightdao.update(flight);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -164,11 +149,8 @@ public class Service {
 			flightdao.update(flight);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -197,11 +179,8 @@ public class Service {
 			routedao.update(route);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -230,12 +209,8 @@ public class Service {
 			
 			return userdao.getAllUser();
 		}
-		catch(ClassNotFoundException cnfEx) {
-			System.out.println("ClassNotFoundException: "+cnfEx.getMessage());
-			return new ArrayList<User>();
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			return new ArrayList<User>();
 		}
 		finally {
@@ -257,11 +232,8 @@ public class Service {
 			bookingdao.update(booking);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -290,11 +262,8 @@ public class Service {
 			bookingdao.insert(booking);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -323,12 +292,8 @@ public class Service {
 			
 			return bookingdao.getAllBooking();
 		}
-		catch(ClassNotFoundException cnfEx) {
-			System.out.println("ClassNotFoundException: "+cnfEx.getMessage());
-			return new ArrayList<>();
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			return new ArrayList<>();
 		}
 		finally {
@@ -350,12 +315,8 @@ public class Service {
 			
 			return flightbookingdao.getAllFlightBookings();
 		}
-		catch(ClassNotFoundException cnfEx) {
-			System.out.println("ClassNotFoundException: "+cnfEx.getMessage());
-			return new ArrayList<>();
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			return new ArrayList<>();
 		}
 		finally {
@@ -377,11 +338,8 @@ public class Service {
 			flightbookingdao.update(flightbooking);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -410,11 +368,8 @@ public class Service {
 			flightbookingdao.insert(flightbooking);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -443,12 +398,8 @@ public class Service {
 			
 			return bookinguserdao.getAllBookingUser();
 		}
-		catch(ClassNotFoundException cnfEx) {
-			System.out.println("ClassNotFoundException: "+cnfEx.getMessage());
-			return new ArrayList<>();
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			return new ArrayList<>();
 		}
 		finally {
@@ -470,12 +421,8 @@ public class Service {
 			
 			return bookinguserdao.getBookingUserByUserID(userID);
 		}
-		catch(ClassNotFoundException cnfEx) {
-			System.out.println("ClassNotFoundException: "+cnfEx.getMessage());
-			return new ArrayList<>();
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			return new ArrayList<>();
 		}
 		finally {
@@ -497,11 +444,8 @@ public class Service {
 			bookinguserdao.update(bookinguser);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -530,11 +474,8 @@ public class Service {
 			bookinguserdao.insert(bookinguser);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -563,11 +504,8 @@ public class Service {
 			bookingpaymentdao.update(bookingpayment);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -596,11 +534,8 @@ public class Service {
 			bookingpaymentdao.insert(bookingpayment);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -629,11 +564,8 @@ public class Service {
 			passengerdao.update(passenger);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -662,11 +594,8 @@ public class Service {
 			passengerdao.insert(passenger);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
@@ -695,12 +624,8 @@ public class Service {
 			
 			return passengerdao.getAllPassenger();
 		}
-		catch(ClassNotFoundException cnfEx) {
-			System.out.println("ClassNotFoundException: "+cnfEx.getMessage());
-			return new ArrayList<>();
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			return new ArrayList<>();
 		}
 		finally {
@@ -733,11 +658,8 @@ public class Service {
 			flightdao.update(flight);
 			connection.commit();
 		}
-		catch(ClassNotFoundException cnfe) {
-			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
-		}
-		catch(SQLException connEx) {
-			System.out.println("SQLException: "+connEx.getMessage());
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
 			if(connection != null) {
 				try {
 					connection.rollback();
