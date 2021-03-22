@@ -111,9 +111,8 @@ public class Menu {
 	
 	public StringBuilder empCheckSeats() {
 		menu.setLength(0);
-		menu.append("Reserved seats: "+flight.getReservedSeats());
+		menu.append("Reserved seats: "+flight.getReservedSeats()+"\n");
 		System.out.println(menu);
-		input.setInput();
 		return input.getInput();
 	}
 	
@@ -128,8 +127,7 @@ public class Menu {
 				+ "Enter ‘quit’ at any prompt to cancel operation.\n");
 		System.out.println(menu);
 		flight = util.empUpdateFlightUtil(flight);
-		service.updateFlight(flight);
-		service.updateRoute(flight.getRoute());
+		service.updateFlight(flight, flight.getRoute());
 		
 		return input.getInput();
 	}
@@ -232,48 +230,57 @@ public class Menu {
 		BookingUser booku = new BookingUser();
 		Passenger passenger = new Passenger();
 		
-		booklist = service.getBookingList();
-		if(booklist.size() > 0) {
-			book.setBookingID(booklist.size()+1);
+
+		if(flight.getReservedSeats() < flight.getAirplane().getAirplaneTypeID().getMaxCap()) {
+			flight.setReservedSeats(flight.getReservedSeats()+1);
+
+			booklist = service.getBookingList();
+			if(booklist.size() > 0) {
+				book.setBookingID(booklist.size()+1);
+			}
+			else {
+				book.setBookingID(1);
+			}
+			book.setIsActive(1);
+			Integer rand = new Random().nextInt(10000)+1;
+			book.setConfirmCode(rand.toString());
+			
+			fbook.setBookingID(book.getBookingID());
+			fbook.setFlightID(flight.getFlightID());
+			
+			bookp.setBookingID(book);
+			bookp.setRefunded(0);
+			rand = new Random().nextInt(10000)+1;
+			bookp.setStripeID(rand.toString());
+			
+			booku.setBookingID(book.getBookingID());
+			booku.setUserID(user.getUserID());
+			
+			passengerlist = service.getPassengerList();
+			if(passengerlist.size() > 0) {
+				passenger.setPassengerID(passengerlist.size()+1);
+			}
+			else {
+				passenger.setPassengerID(1);
+			}
+			passenger.setBookingID(book);
+			passenger.setFamilyName(user.getFamilyName());
+			passenger.setGivenName(user.getGivenName());
+			System.out.println("Enter your address:\n");
+			input.setInput();
+			passenger.setAddress(input.getInput().toString());
+			System.out.println("Enter your gender:\n");
+			input.setInput();
+			passenger.setGender(input.getInput().toString());
+			System.out.println("Enter your date of birth:\n");
+			input.setInput();
+			passenger.setDob(input.getInput().toString());
+			System.out.println("Book flight successful");
+			
+			service.bookFlight(book, bookp, booku, passenger, fbook, flight);
 		}
 		else {
-			book.setBookingID(1);
+			System.out.println("Book flight unsuccessful");
 		}
-		book.setIsActive(1);
-		Integer rand = new Random().nextInt(10000)+1;
-		book.setConfirmCode(rand.toString());
-		
-		fbook.setBookingID(book.getBookingID());
-		fbook.setFlightID(flight.getFlightID());
-		
-		bookp.setBookingID(book);
-		bookp.setRefunded(0);
-		rand = new Random().nextInt(10000)+1;
-		bookp.setStripeID(rand.toString());
-		
-		booku.setBookingID(book.getBookingID());
-		booku.setUserID(user.getUserID());
-		
-		passengerlist = service.getPassengerList();
-		if(passengerlist.size() > 0) {
-			passenger.setPassengerID(passengerlist.size()+1);
-		}
-		else {
-			passenger.setPassengerID(1);
-		}
-		passenger.setBookingID(book);
-		passenger.setFamilyName(user.getFamilyName());
-		passenger.setGivenName(user.getGivenName());
-		System.out.println("Enter your address:\n");
-		input.setInput();
-		passenger.setAddress(input.getInput().toString());
-		System.out.println("Enter your gender:\n");
-		input.setInput();
-		passenger.setGender(input.getInput().toString());
-		System.out.println("Enter your date of birth:\n");
-		input.setInput();
-		passenger.setDob(input.getInput().toString());
-		
-		System.out.println("Book flight successful");
 	}
 }

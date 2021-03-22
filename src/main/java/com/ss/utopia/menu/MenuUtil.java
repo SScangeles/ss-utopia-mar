@@ -100,18 +100,23 @@ public class MenuUtil {
 			else {
 				time.append(input.getInput());
 				inputLoop = false;
-			}
-			
+			}	
 		}
-		route.setOriginAirport(origin);
-		route.setDestAirport(dest);
-		route.setRouteID(flight.getRoute().getRouteID());
-		updateFlight.setFlightID(flight.getFlightID());
-		updateFlight.setRoute(route);
-		updateFlight.setAirplane(flight.getAirplane());
-		updateFlight.setDepartureTime(Timestamp.valueOf(date.toString()+" "+time.toString()));
-		updateFlight.setReservedSeats(flight.getReservedSeats());
-		updateFlight.setSeatPrice(flight.getSeatPrice());
+		try {
+			route.setOriginAirport(origin);
+			route.setDestAirport(dest);
+			route.setRouteID(flight.getRoute().getRouteID());
+			updateFlight.setFlightID(flight.getFlightID());
+			updateFlight.setRoute(route);
+			updateFlight.setAirplane(flight.getAirplane());
+			updateFlight.setDepartureTime(Timestamp.valueOf(date.toString()+" "+time.toString()));
+			updateFlight.setReservedSeats(flight.getReservedSeats());
+			updateFlight.setSeatPrice(flight.getSeatPrice());
+		}
+		catch(IllegalArgumentException iaEx) {
+			System.out.println("IllegalArgmentException: "+iaEx.getMessage()+"\nUpdate flight unsuccessful.");
+			return flight;
+		}
 		return updateFlight;
 	}
 	
@@ -127,7 +132,7 @@ public class MenuUtil {
 		
 		input.setInput();
 		int seat = Integer.parseInt(input.getInput().toString());
-		if( seat >= 0 && seat <= flight.getAirplane().getAirplaneTypeID().getMaxCap()) {
+		if( seat >= 0 && seat < flight.getAirplane().getAirplaneTypeID().getMaxCap()) {
 			updateFlight.setFlightID(flight.getFlightID());
 			updateFlight.setRoute(flight.getRoute());
 			updateFlight.setAirplane(flight.getAirplane());

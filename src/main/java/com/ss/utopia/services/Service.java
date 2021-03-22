@@ -128,6 +128,41 @@ public class Service {
 		}
 	}
 
+	public void updateFlight(Flight flight, Route route) {
+		try {
+			connection = serviceUtil.getConnection();
+			FlightDAO flightdao = new FlightDAO(connection);
+			RouteDAO routedao = new RouteDAO(connection);
+			routedao.update(route);
+			flightdao.update(flight);
+			connection.commit();
+		}
+		catch(ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
+		}
+		catch(SQLException connEx) {
+			System.out.println("SQLException: "+connEx.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+
 	public void updateRoute(Route route) {
 		try {
 			connection = serviceUtil.getConnection();
@@ -221,6 +256,39 @@ public class Service {
 		}
 	}
 	
+	public void insertBooking(Booking booking) {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingDAO bookingdao = new BookingDAO(connection);
+			bookingdao.insert(booking);
+			connection.commit();
+		}
+		catch(ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
+		}
+		catch(SQLException connEx) {
+			System.out.println("SQLException: "+connEx.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
 	public List<Booking> getBookingList() {
 		try {
 			connection = serviceUtil.getConnection();
@@ -253,6 +321,39 @@ public class Service {
 			connection = serviceUtil.getConnection();
 			FlightBookingsDAO flightbookingdao = new FlightBookingsDAO(connection);
 			flightbookingdao.update(flightbooking);
+			connection.commit();
+		}
+		catch(ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
+		}
+		catch(SQLException connEx) {
+			System.out.println("SQLException: "+connEx.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
+	public void insertFlightBooking(FlightBookings flightbooking) {
+		try {
+			connection = serviceUtil.getConnection();
+			FlightBookingsDAO flightbookingdao = new FlightBookingsDAO(connection);
+			flightbookingdao.insert(flightbooking);
 			connection.commit();
 		}
 		catch(ClassNotFoundException cnfe) {
@@ -314,11 +415,77 @@ public class Service {
 		}
 	}
 	
+	public void insertBookingUser(BookingUser bookinguser) {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingUserDAO bookinguserdao = new BookingUserDAO(connection);
+			bookinguserdao.insert(bookinguser);
+			connection.commit();
+		}
+		catch(ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
+		}
+		catch(SQLException connEx) {
+			System.out.println("SQLException: "+connEx.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
 	public void updateBookingPayment(BookingPayment bookingpayment) {
 		try {
 			connection = serviceUtil.getConnection();
 			BookingPaymentDAO bookingpaymentdao = new BookingPaymentDAO(connection);
 			bookingpaymentdao.update(bookingpayment);
+			connection.commit();
+		}
+		catch(ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
+		}
+		catch(SQLException connEx) {
+			System.out.println("SQLException: "+connEx.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
+	public void insertBookingPayment(BookingPayment bookingpayment) {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingPaymentDAO bookingpaymentdao = new BookingPaymentDAO(connection);
+			bookingpaymentdao.insert(bookingpayment);
 			connection.commit();
 		}
 		catch(ClassNotFoundException cnfe) {
@@ -379,6 +546,39 @@ public class Service {
 			}
 		}
 	}
+
+	public void insertPassenger(Passenger passenger) {
+		try {
+			connection = serviceUtil.getConnection();
+			PassengerDAO passengerdao = new PassengerDAO(connection);
+			passengerdao.insert(passenger);
+			connection.commit();
+		}
+		catch(ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
+		}
+		catch(SQLException connEx) {
+			System.out.println("SQLException: "+connEx.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
 	
 	public List<Passenger> getPassengerList() {
 		try {
@@ -394,6 +594,50 @@ public class Service {
 		catch(SQLException connEx) {
 			System.out.println("SQLException: "+connEx.getMessage());
 			return new ArrayList<>();
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+
+	public void bookFlight(Booking booking, BookingPayment bookpay, BookingUser bookuser, 
+			Passenger passenger, FlightBookings flightbook, Flight flight) {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingDAO bookdao = new BookingDAO(connection);
+			FlightBookingsDAO fbookdao = new FlightBookingsDAO(connection);
+			BookingPaymentDAO bookpdao = new BookingPaymentDAO(connection);
+			BookingUserDAO bookudao = new BookingUserDAO(connection);
+			PassengerDAO passengerdao = new PassengerDAO(connection);
+			FlightDAO flightdao = new FlightDAO(connection);
+			bookdao.insert(booking);
+			fbookdao.insert(flightbook);
+			bookpdao.insert(bookpay);
+			bookudao.insert(bookuser);
+			passengerdao.insert(passenger);
+			flightdao.update(flight);
+			connection.commit();
+		}
+		catch(ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException: "+cnfe.getMessage());
+		}
+		catch(SQLException connEx) {
+			System.out.println("SQLException: "+connEx.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
 		}
 		finally {
 			if(connection != null) {
