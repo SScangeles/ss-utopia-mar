@@ -34,10 +34,8 @@ public class RouteDAO extends BaseDAO<Route> {
 
 	@Override
 	public void insert(Route route) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "insert into route(id, origin_id, destination_id)\r\n"
-				+ "values (?, ?, ?);"
-				+ "set foreign_key_checks = 1;\r\n", 
+		saveData("insert into route(id, origin_id, destination_id)\r\n"
+				+ "values (?, ?, ?);", 
 				new Object[] {route.getRouteID(), route.getOriginAirport().getAirportID(), 
 						route.getDestAirport().getAirportID()});
 	}
@@ -50,13 +48,10 @@ public class RouteDAO extends BaseDAO<Route> {
 
 	@Override
 	public void update(Route route) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "update route \r\n"
-				+ "set \r\n"
+		saveData("update route set \r\n"
 				+ "route.origin_id = ?,\r\n"
 				+ "route.destination_id = ?,\r\n"
-				+ "where route.id = ?;\r\n"
-				+ "set foreign_key_checks = 1;", 
+				+ "where route.id = ?;", 
 				new Object[] {route.getOriginAirport().getAirportID(), route.getDestAirport().getAirportID(), 
 						route.getRouteID()});
 	}

@@ -28,7 +28,7 @@ public class Console {
 						boolean list = true;
 						while(list) {
 							int flightID = Integer.parseInt(menu.empFlights().toString());
-							if(flightID < menu.getFlightList().size()) {
+							if(flightID <= menu.getFlightList().size()) {
 								//go to flight detail
 								boolean detail = true;
 								while(detail) {

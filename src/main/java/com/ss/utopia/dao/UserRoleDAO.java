@@ -35,10 +35,8 @@ public class UserRoleDAO extends BaseDAO<UserRole> {
 
 	@Override
 	public void insert(UserRole role) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "insert into user_role(id, name)\r\n"
-				+ "values (?, ?);"
-				+ "set foreign_key_checks = 1;\r\n", 
+		saveData("insert into user_role(id, name)\r\n"
+				+ "values (?, ?);", 
 				new Object[] {role.getRoleID(), role.getName()});
 	}
 
@@ -50,12 +48,9 @@ public class UserRoleDAO extends BaseDAO<UserRole> {
 
 	@Override
 	public void update(UserRole role) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "update user_role \r\n"
-				+ "set \r\n"
+		saveData("update user_role set \r\n"
 				+ "user_role.name = ?,\r\n"
-				+ "where user_role.id = ?;\r\n"
-				+ "set foreign_key_checks = 1;", 
+				+ "where user_role.id = ?;", 
 				new Object[] {role.getName(), role.getRoleID()});
 	}
 	

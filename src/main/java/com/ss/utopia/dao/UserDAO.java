@@ -34,10 +34,8 @@ public class UserDAO extends BaseDAO<User> {
 
 	@Override
 	public void insert(User user) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "insert into user(id, role_id, given_name, family_name, username, email, password, phone)\r\n"
-				+ "values (?, ?, ?, ?, ?, ?, ?, ?);"
-				+ "set foreign_key_checks = 1;\r\n", 
+		saveData("insert into user(id, role_id, given_name, family_name, username, email, password, phone)\r\n"
+				+ "values (?, ?, ?, ?, ?, ?, ?, ?);", 
 				new Object[] {user.getUserID(), user.getRoleID().getRoleID(), user.getGivenName(), user.getFamilyName(), 
 						user.getUsername(), user.getEmail(), user.getPassword(), user.getPhone()});
 	}
@@ -50,9 +48,7 @@ public class UserDAO extends BaseDAO<User> {
 
 	@Override
 	public void update(User user) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "update user \r\n"
-				+ "set \r\n"
+		saveData("update user set \r\n"
 				+ "user.role_id = ?,\r\n"
 				+ "user.given_name = ?,\r\n"
 				+ "user.family_name = ?,\r\n"
@@ -60,8 +56,7 @@ public class UserDAO extends BaseDAO<User> {
 				+ "user.email = ?,\r\n"
 				+ "user.password = ?,\r\n"
 				+ "user.phone = ?,\r\n"
-				+ "where user.id = ?;\r\n"
-				+ "set foreign_key_checks = 1;", 
+				+ "where user.id = ?;", 
 				new Object[] {user.getRoleID().getRoleID(), user.getGivenName(), user.getFamilyName(), user.getUsername(), 
 						user.getEmail(), user.getPassword(), user.getPhone(), user.getUserID()});
 	}

@@ -34,10 +34,8 @@ public class BookingGuestDAO extends BaseDAO<BookingGuest> {
 
 	@Override
 	public void insert(BookingGuest guest) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "insert into booking_guest(booking_id, contact_email, contact_phone)\r\n"
-				+ "values (?, ?, ?);"
-				+ "set foreign_key_checks = 1;\r\n", 
+		saveData("insert into booking_guest(booking_id, contact_email, contact_phone)\r\n"
+				+ "values (?, ?, ?);", 
 				new Object[] {guest.getBookingID().getBookingID(), guest.getContactEmail(), guest.getContactPhone()});
 	}
 
@@ -49,13 +47,10 @@ public class BookingGuestDAO extends BaseDAO<BookingGuest> {
 
 	@Override
 	public void update(BookingGuest guest) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "update booking_guest \r\n"
-				+ "set \r\n"
+		saveData("update booking_guest set \r\n"
 				+ "booking_guest.contact_email = ?,\r\n"
-				+ "booking_guest.contact_phone = ?,\r\n"
-				+ "where booking_guest.booking_id = ?;\r\n"
-				+ "set foreign_key_checks = 1;", 
+				+ "booking_guest.contact_phone = ?\r\n"
+				+ "where booking_guest.booking_id = ?;", 
 				new Object[] {guest.getContactEmail(), guest.getContactPhone(), guest.getBookingID().getBookingID()});
 	}
 	

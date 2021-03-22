@@ -34,10 +34,8 @@ public class PassengerDAO extends BaseDAO<Passenger> {
 
 	@Override
 	public void insert(Passenger passenger) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "insert into passenger(id, booking_id, given_name, family_name, dob, gender, address)\r\n"
-				+ "values (?, ?, ?, ?, ?, ?, ?);"
-				+ "set foreign_key_checks = 1;\r\n", 
+		saveData("insert into passenger(id, booking_id, given_name, family_name, dob, gender, address)\r\n"
+				+ "values (?, ?, ?, ?, ?, ?, ?);", 
 				new Object[] {passenger.getPassengerID(), passenger.getBookingID().getBookingID(), passenger.getGivenName(), 
 						passenger.getFamilyName(), passenger.getDob(), passenger.getGender(), passenger.getAddress()});
 	}
@@ -50,17 +48,14 @@ public class PassengerDAO extends BaseDAO<Passenger> {
 
 	@Override
 	public void update(Passenger passenger) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "update passenger \r\n"
-				+ "set \r\n"
+		saveData("update passenger set \r\n"
 				+ "passenger.booking_id = ?,\r\n"
 				+ "passenger.given_name = ?,\r\n"
 				+ "passenger.family_name = ?,\r\n"
 				+ "passenger.dob = ?,\r\n"
 				+ "passenger.gender = ?,\r\n"
 				+ "passenger.address = ?,\r\n"
-				+ "where passenger.id = ?;\r\n"
-				+ "set foreign_key_checks = 1;", 
+				+ "where passenger.id = ?;", 
 				new Object[] {passenger.getBookingID().getBookingID(), passenger.getGivenName(), passenger.getFamilyName(), 
 						passenger.getDob(), passenger.getGender(), passenger.getAddress(), passenger.getPassengerID()});
 	}

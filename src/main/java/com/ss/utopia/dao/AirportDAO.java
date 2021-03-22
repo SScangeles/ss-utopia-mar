@@ -36,10 +36,8 @@ public class AirportDAO extends BaseDAO<Airport> {
 
 	@Override
 	public void insert(Airport airport) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "insert into airport(iata_id, city)\r\n"
-				+ "values (?, ?);"
-				+ "set foreign_key_checks = 1;\r\n", 
+		saveData("insert into airport(iata_id, city)\r\n"
+				+ "values (?, ?);", 
 				new Object[] {airport.getAirportID(), airport.getCity()});
 	}
 
@@ -51,12 +49,9 @@ public class AirportDAO extends BaseDAO<Airport> {
 
 	@Override
 	public void update(Airport airport) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "update airport \r\n"
-				+ "set \r\n"
-				+ "airport.city = ?,\r\n"
-				+ "where airport.iata_id = ?;\r\n"
-				+ "set foreign_key_checks = 1;", 
+		saveData("update airport set \r\n"
+				+ "airport.city = ?\r\n"
+				+ "where airport.iata_id = ?;", 
 				new Object[] {airport.getCity(), airport.getAirportID()});
 	}
 	

@@ -3,10 +3,13 @@
  */
 package com.ss.utopia.menu;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ss.utopia.entity.Airport;
 import com.ss.utopia.entity.Flight;
+import com.ss.utopia.entity.Route;
 import com.ss.utopia.services.EmployeeService;
 
 /**
@@ -94,9 +97,9 @@ public class Menu {
 				+ " and Departure Airport: "+flight.getRoute().getOriginAirport().getCity()
 				+ " and Arrival Airport: "+flight.getRoute().getDestAirport().getCity()+".\n\n"
 				+ "Departure Airport: "+flight.getRoute().getOriginAirport().getAirportID()
-				+ " | Arrival Airport: "+flight.getRoute().getDestAirport().getAirportID()+" | \n"
+				+ " | Arrival Airport: "+flight.getRoute().getDestAirport().getAirportID()+" |\n"
 				+ "Departure Date: "+flight.getDepartureTime().toString().split(" ")[0]
-				+ " | Departure Time: "+flight.getDepartureTime().toString().split(" ")[1]+" | \n\n"
+				+ " | Departure Time: "+flight.getDepartureTime().toString().split(" ")[1]+" |\n\n"
 				+ "Available Seats:\n"
 				+ "1) Check reserved seats\n"
 				+ "2) Return to previous\n");
@@ -115,10 +118,16 @@ public class Menu {
 	
 	public StringBuilder empUpdateFlight() {
 		EmployeeService service = new EmployeeService();
-		Flight updateFlight = new Flight();
-		//display output
-		service.updateFlight(updateFlight);
-		input.setInput();
+		MenuUtil util = new MenuUtil();
+		menu.setLength(0);
+		menu.append(
+				"You have chosen to update the Flight with Flight Id: "+flight.getFlightID()
+				+ "and Flight Origin: "+flight.getRoute().getOriginAirport().getAirportID()
+				+ " and Flight Destination: "+flight.getRoute().getDestAirport().getAirportID()+".\n"
+				+ "Enter ‘quit’ at any prompt to cancel operation.\n");
+		System.out.println(menu);
+		util.empUpdateFlightUtil(flight);
+		//call update service
 		return input.getInput();
 	}
 }

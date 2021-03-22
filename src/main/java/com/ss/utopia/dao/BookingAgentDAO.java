@@ -38,10 +38,8 @@ public class BookingAgentDAO extends BaseDAO<BookingAgent> {
 
 	@Override
 	public void insert(BookingAgent agent) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "insert into booking_agent(booking_id, agent_id)\r\n"
-				+ "values (?, ?);"
-				+ "set foreign_key_checks = 1;\r\n", 
+		saveData("insert into booking_agent(booking_id, agent_id)\r\n"
+				+ "values (?, ?);", 
 				new Object[] {agent.getBookingID(), agent.getAgentID()});
 	}
 
@@ -53,12 +51,9 @@ public class BookingAgentDAO extends BaseDAO<BookingAgent> {
 
 	@Override
 	public void update(BookingAgent agent) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "update booking_agent \r\n"
-				+ "set \r\n"
-				+ "booking_agent.agent_id = ?,\r\n"
-				+ "where booking_agent.booking_id = ?;\r\n"
-				+ "set foreign_key_checks = 1;", 
+		saveData("update booking_agent set \r\n"
+				+ "booking_agent.agent_id = ?\r\n"
+				+ "where booking_agent.booking_id = ?;", 
 				new Object[] {agent.getAgentID(), agent.getBookingID()});
 	}
 	

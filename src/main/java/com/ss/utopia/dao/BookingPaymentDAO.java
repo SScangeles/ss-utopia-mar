@@ -34,10 +34,8 @@ public class BookingPaymentDAO extends BaseDAO<BookingPayment> {
 
 	@Override
 	public void insert(BookingPayment payment) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "insert into booking_payment(booking_id, stripe_id, refunded)\r\n"
-				+ "values (?, ?, ?);"
-				+ "set foreign_key_checks = 1;\r\n", 
+		saveData("insert into booking_payment(booking_id, stripe_id, refunded)\r\n"
+				+ "values (?, ?, ?);", 
 				new Object[] {payment.getBookingID().getBookingID(), payment.getStripeID(), payment.getRefunded()});
 	}
 
@@ -49,13 +47,10 @@ public class BookingPaymentDAO extends BaseDAO<BookingPayment> {
 
 	@Override
 	public void update(BookingPayment payment) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "update booking_payment \r\n"
-				+ "set \r\n"
+		saveData("update booking_payment set \r\n"
 				+ "booking_payment.stripe_id = ?,\r\n"
-				+ "booking_payment.refunded = ?,\r\n"
-				+ "where booking_payment.booking_id = ?;\r\n"
-				+ "set foreign_key_checks = 1;", 
+				+ "booking_payment.refunded = ?\r\n"
+				+ "where booking_payment.booking_id = ?;", 
 				new Object[] {payment.getStripeID(), payment.getRefunded(), payment.getBookingID().getBookingID()});
 	}
 	

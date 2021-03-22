@@ -34,10 +34,8 @@ public class AirplaneDAO extends BaseDAO<Airplane> {
 
 	@Override
 	public void insert(Airplane airplane) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "insert into airplane(id, type_id)\r\n"
-				+ "values (?, ?);"
-				+ "set foreign_key_checks = 1;\r\n", 
+		saveData("insert into airplane(id, type_id)\r\n"
+				+ "values (?, ?);", 
 				new Object[] {airplane.getAirplaneID(), airplane.getAirplaneTypeID().getAirplaneTypeID()});
 	}
 
@@ -49,12 +47,9 @@ public class AirplaneDAO extends BaseDAO<Airplane> {
 
 	@Override
 	public void update(Airplane airplane) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "update airplane \r\n"
-				+ "set \r\n"
-				+ "airplane.type_id = ?,\r\n"
-				+ "where airplane.id = ?;\r\n"
-				+ "set foreign_key_checks = 1;", 
+		saveData("update airplane set \r\n"
+				+ "airplane.type_id = ?\r\n"
+				+ "where airplane.id = ?;", 
 				new Object[] {airplane.getAirplaneTypeID().getAirplaneTypeID(), airplane.getAirplaneID()});
 	}
 	

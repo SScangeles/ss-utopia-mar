@@ -35,10 +35,8 @@ public class FlightBookingsDAO extends BaseDAO<FlightBookings> {
 
 	@Override
 	public void insert(FlightBookings flightbook) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "insert into flight_bookings(flight_id, booking_id)\r\n"
-				+ "values (?, ?);"
-				+ "set foreign_key_checks = 1;\r\n", 
+		saveData("insert into flight_bookings(flight_id, booking_id)\r\n"
+				+ "values (?, ?);", 
 				new Object[] {flightbook.getFlightID(), flightbook.getBookingID()});
 	}
 
@@ -50,13 +48,11 @@ public class FlightBookingsDAO extends BaseDAO<FlightBookings> {
 
 	@Override
 	public void update(FlightBookings flightbook) throws SQLException {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "update flight_bookings \r\n"
-				+ "set \r\n"
+		saveData("update flight_bookings set \r\n"
 				+ "flight_bookings.flight_id = ?,\r\n"
-				+ "flight_bookings.booking_id = ?,\r\n"
-				+ "set foreign_key_checks = 1;", 
-				new Object[] {flightbook.getFlightID(), flightbook.getBookingID()});
+				+ "flight_bookings.booking_id = ?"
+				+ "where flight_bookings.flight_id = ?",
+				new Object[] {flightbook.getFlightID(), flightbook.getBookingID(), flightbook.getFlightID()});
 	}
 	
 	public List<FlightBookings> getAllFlightBookings() throws SQLException {

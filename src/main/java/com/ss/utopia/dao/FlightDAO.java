@@ -34,12 +34,10 @@ public class FlightDAO extends BaseDAO<Flight> {
 
 	@Override
 	public void insert(Flight flight) throws SQLException  {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "insert into flight(id, route_id, airplane_id, departure_time)\r\n"
-				+ "values (?, ?, ?, ?);"
-				+ "set foreign_key_checks = 1;\r\n", 
-				new Object[] {flight.getFlightID(), flight.getRoute().getRouteID(), 
-						flight.getAirplane().getAirplaneID(), flight.getDepartureTime()});
+		saveData("insert into flight(id, route_id, airplane_id, departure_time, reserved_seats, seat_price)\r\n"
+				+ "values (?, ?, ?, ?, ?, ?);", 
+				new Object[] {flight.getFlightID(), flight.getRoute().getRouteID(), flight.getAirplane().getAirplaneID(), 
+						flight.getDepartureTime(), flight.getReservedSeats(), flight.getSeatPrice()});
 	}
 
 	@Override
@@ -50,16 +48,15 @@ public class FlightDAO extends BaseDAO<Flight> {
 
 	@Override
 	public void update(Flight flight) throws SQLException  {
-		saveData("set foreign_key_checks = 0;\r\n"
-				+ "update flight \r\n"
-				+ "set \r\n"
-				+ "flight.route_id = ?,\r\n"
-				+ "flight.airplane_id = ?,\r\n"
-				+ "flight.departure_time = ?\r\n"
-				+ "where flight.id = ?;\r\n"
-				+ "set foreign_key_checks = 1;", 
-				new Object[] {flight.getRoute().getRouteID(), flight.getAirplane().getAirplaneID(), 
-						flight.getDepartureTime(), flight.getFlightID()});
+		saveData("update flight set \n"
+				+ "route_id = ?, \n"
+				+ "airplane_id = ?, \n"
+				+ "departure_time = ?, \n"
+				+ "reserved_seats = ?, \n"
+				+ "seat_price = ? \n"
+				+ "where id = ?;", 
+				new Object[] {flight.getRoute().getRouteID(), flight.getAirplane().getAirplaneID(), flight.getDepartureTime(), 
+						flight.getReservedSeats(), flight.getSeatPrice(), flight.getFlightID()});
 	}
 	
 	public List<Flight> getAllFlight() throws SQLException {
