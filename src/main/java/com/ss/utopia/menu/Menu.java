@@ -285,7 +285,6 @@ public class Menu {
 	
 	public StringBuilder travelCancelList() {
 		Service service = new Service();
-		List<Flight> flightList = new ArrayList<>();
 		flightList = service.getFlightListByUserID(user.getUserID());
 		menu.setLength(0);
 		int count = 1;
@@ -298,6 +297,19 @@ public class Menu {
 		menu.append(count+") Return to previous\n");
 		System.out.println(menu);
 		input.setInput();
+		return input.getInput();
+	}
+	
+	public StringBuilder travelCancelBooking(Integer flightID) {
+		Service service = new Service();
+		if(flightList.size() > 0) {
+			flight = service.getFlight(flightList.get(flightID-1)).get(0);
+			System.out.println(
+					  "1) View flight details\n"
+					+ "2) Cancel this flight\n"
+					+ "3) Return to previous\n");
+			input.setInput();
+		}
 		return input.getInput();
 	}
 }

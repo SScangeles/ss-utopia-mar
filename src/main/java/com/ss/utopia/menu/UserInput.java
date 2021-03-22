@@ -32,7 +32,7 @@ public class UserInput {
 	 */
 	public StringBuilder getInput() {
 		if(input.length() < 1) {
-			input.append(32);
+			input.append(" ");
 		}
 		return input;
 	}

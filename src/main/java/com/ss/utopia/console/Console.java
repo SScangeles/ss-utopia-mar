@@ -84,13 +84,13 @@ public class Console {
 				while(travel) {
 					switch(menu.travelMenu().charAt(0)) {
 					case '1': //go to flight list
-						boolean list = true;
-						while(list) {
+						boolean flightlist = true;
+						while(flightlist) {
 							int flightID = Integer.parseInt(menu.travelFlights().toString());
 							if(flightID <= menu.getFlightList().size()) {
 								//go to flight detail to book
-								boolean detail = true;
-								while(detail) {
+								boolean flightdetail = true;
+								while(flightdetail) {
 									switch(menu.travelBooking(flightID).charAt(0)) {
 									case '1': //view flight detail
 										menu.travelViewFlight();
@@ -99,8 +99,8 @@ public class Console {
 										menu.travelBookFlight();
 										break;
 									case '3': //return to traveler
-										detail = false;
-										list = false;
+										flightdetail = false;
+										flightlist = false;
 										break;
 									default:
 										break;
@@ -109,12 +109,38 @@ public class Console {
 							}
 							else if(flightID == menu.getFlightList().size()+1) {
 								//return to traveler
-								list = false;
+								flightlist = false;
 							}
 						}
 						break;
 					case '2': //go to booking list to cancel
-						menu.travelCancelList();
+						boolean booklist = true;
+						while(booklist) {
+							int flightID = Integer.parseInt(menu.travelCancelList().toString());
+							if(flightID <= menu.getFlightList().size()) {
+								//go to flight detail to book
+								boolean canceldetail = true;
+								while(canceldetail) {
+									switch(menu.travelCancelBooking(flightID).charAt(0)) {
+									case '1': //view flight detail
+										menu.travelViewFlight();
+										break;
+									case '2': //cancel flight
+										break;
+									case '3': //return to traveler
+										canceldetail = false;
+										booklist = false;
+										break;
+									default:
+										break;
+									}
+								}
+							}
+							else if(flightID == menu.getFlightList().size()+1) {
+								//return to traveler
+								booklist = false;
+							}
+						}
 						break;
 					case '3': //return to utopia
 						travel = false;
