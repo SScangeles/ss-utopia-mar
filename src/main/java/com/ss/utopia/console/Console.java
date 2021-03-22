@@ -53,7 +53,7 @@ public class Console {
 										menu.empUpdateFlight();
 										break;
 									case '3': //go to add seat
-										System.out.println("add seat");
+										menu.empAddSeat();
 										break;
 									case '4': //return to flight detail
 										detail = false;
@@ -78,8 +78,13 @@ public class Console {
 				}
 				break;
 			case '2': //go to admin
+				boolean admin = true;
 				break;
 			case '3': //go to traveler
+				boolean travel = true;
+				while(travel) {
+					
+				}
 				break;
 			case 'q': //quit utopia
 				System.out.println("Closing Utopia");

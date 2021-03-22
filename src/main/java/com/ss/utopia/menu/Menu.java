@@ -3,13 +3,10 @@
  */
 package com.ss.utopia.menu;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ss.utopia.entity.Airport;
 import com.ss.utopia.entity.Flight;
-import com.ss.utopia.entity.Route;
 import com.ss.utopia.services.EmployeeService;
 
 /**
@@ -33,13 +30,7 @@ public class Menu {
 	 * @return the flightList
 	 */
 	public List<Flight> getFlightList() {
-		return flightList;
-	}
-	/**
-	 * @return the flight
-	 */
-	public Flight getFlight() {
-		return flight;
+		return this.flightList;
 	}
 
 	public StringBuilder utopiaMenu() {
@@ -78,8 +69,9 @@ public class Menu {
 	}
 	
 	public StringBuilder empFlightDetail(Integer flightID) {
+		EmployeeService service = new EmployeeService();
 		if(flightList.size() > 0) {
-			flight = flightList.get(flightID-1);
+			flight = service.getFlight(flightList.get(flightID-1)).get(0);
 			System.out.println(
 					  "1) View more details about the flight\n"
 					+ "2) Update the details of the flight\n"
@@ -126,8 +118,29 @@ public class Menu {
 				+ " and Flight Destination: "+flight.getRoute().getDestAirport().getAirportID()+".\n"
 				+ "Enter ‘quit’ at any prompt to cancel operation.\n");
 		System.out.println(menu);
-		util.empUpdateFlightUtil(flight);
-		//call update service
+		flight = util.empUpdateFlightUtil(flight);
+		service.updateFlight(flight);
+		service.updateRoute(flight.getRoute());
+		
+		return input.getInput();
+	}
+	
+	public StringBuilder empAddSeat() {
+		EmployeeService service = new EmployeeService();
+		MenuUtil util = new MenuUtil();
+		System.out.println(
+				  "Reserve a seat for flight?\n"
+				+ "1) Add seat\n"
+				+ "2) Return to previous\n");
+		input.setInput();
+		if(input.getInput().charAt(0) == '1') {
+			flight = util.empUpdateSeatUtil(flight);
+			service.updateFlight(flight);
+		}
+		return input.getInput();
+	}
+	
+	public StringBuilder travelMenu() {
 		return input.getInput();
 	}
 }

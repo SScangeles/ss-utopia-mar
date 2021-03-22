@@ -50,7 +50,7 @@ public class RouteDAO extends BaseDAO<Route> {
 	public void update(Route route) throws SQLException {
 		saveData("update route set \r\n"
 				+ "route.origin_id = ?,\r\n"
-				+ "route.destination_id = ?,\r\n"
+				+ "route.destination_id = ?\r\n"
 				+ "where route.id = ?;", 
 				new Object[] {route.getOriginAirport().getAirportID(), route.getDestAirport().getAirportID(), 
 						route.getRouteID()});
