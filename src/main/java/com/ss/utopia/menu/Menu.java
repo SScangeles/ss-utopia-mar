@@ -14,7 +14,9 @@ import com.ss.utopia.entity.Flight;
 import com.ss.utopia.entity.FlightBookings;
 import com.ss.utopia.entity.Passenger;
 import com.ss.utopia.entity.User;
-import com.ss.utopia.services.Service;
+import com.ss.utopia.services.CreateService;
+import com.ss.utopia.services.ReadService;
+import com.ss.utopia.services.UpdateService;
 
 /**
  * @author Christian Angeles
@@ -61,7 +63,7 @@ public class Menu {
 	}
 	
 	public StringBuilder empFlights() {
-		Service service = new Service();
+		ReadService service = new ReadService();
 		flightList = service.getFlightList();
 		menu.setLength(0);
 		int count = 1;
@@ -78,7 +80,7 @@ public class Menu {
 	}
 	
 	public StringBuilder empFlightDetail(Integer flightID) {
-		Service service = new Service();
+		ReadService service = new ReadService();
 		if(flightList.size() > 0 && flightID > 0) {
 			flight = service.getFlight(flightList.get(flightID-1)).get(0);
 			System.out.println(
@@ -117,7 +119,7 @@ public class Menu {
 	}
 	
 	public StringBuilder empUpdateFlight() {
-		Service service = new Service();
+		UpdateService service = new UpdateService();
 		MenuUtil util = new MenuUtil();
 		menu.setLength(0);
 		menu.append(
@@ -133,7 +135,7 @@ public class Menu {
 	}
 	
 	public StringBuilder empAddSeat() {
-		Service service = new Service();
+		UpdateService service = new UpdateService();
 		MenuUtil util = new MenuUtil();
 		System.out.println(
 				  "Reserve a seat for flight?\n"
@@ -148,7 +150,7 @@ public class Menu {
 	}
 	
 	public boolean checkMembership() {
-		Service service = new Service();
+		ReadService service = new ReadService();
 		List<User> userlist = new ArrayList<>();
 		userlist = service.getUserList();
 		System.out.println("Enter the your Membership Number:\n");
@@ -174,7 +176,7 @@ public class Menu {
 	}
 	
 	public StringBuilder travelFlights() {
-		Service service = new Service();
+		ReadService service = new ReadService();
 		flightList = service.getFlightList();
 		menu.setLength(0);
 		int count = 1;
@@ -192,7 +194,7 @@ public class Menu {
 	}
 	
 	public StringBuilder travelBooking(Integer flightID) {
-		Service service = new Service();
+		ReadService service = new ReadService();
 		if(flightList.size() > 0 && flightID > 0) {
 			flight = service.getFlight(flightList.get(flightID-1)).get(0);
 			System.out.println(
@@ -221,7 +223,8 @@ public class Menu {
 	}
 	
 	public void travelBookFlight() {
-		Service service = new Service();
+		ReadService rservice = new ReadService();
+		CreateService cservice = new CreateService();
 		List<Booking> booklist = new ArrayList<>();
 		List<Passenger> passengerlist = new ArrayList<>();
 		Booking book = new Booking();
@@ -234,7 +237,7 @@ public class Menu {
 		if(flight.getReservedSeats() < flight.getAirplane().getAirplaneTypeID().getMaxCap()) {
 			flight.setReservedSeats(flight.getReservedSeats()+1);
 
-			booklist = service.getBookingList();
+			booklist = rservice.getBookingList();
 			if(booklist.size() > 0) {
 				book.setBookingID(booklist.size()+1);
 			}
@@ -256,7 +259,7 @@ public class Menu {
 			booku.setBookingID(book.getBookingID());
 			booku.setUserID(user.getUserID());
 			
-			passengerlist = service.getPassengerList();
+			passengerlist = rservice.getPassengerList();
 			if(passengerlist.size() > 0) {
 				passenger.setPassengerID(passengerlist.size()+1);
 			}
@@ -276,7 +279,7 @@ public class Menu {
 			input.setInput();
 			passenger.setDob(input.getInput().toString());
 			
-			service.bookFlight(book, bookp, booku, passenger, fbook, flight);
+			cservice.insertBookFlight(book, bookp, booku, passenger, fbook, flight);
 		}
 		else {
 			System.out.println("Book flight unsuccessful");
@@ -284,7 +287,7 @@ public class Menu {
 	}
 	
 	public StringBuilder travelCancelList() {
-		Service service = new Service();
+		ReadService service = new ReadService();
 		flightList = service.getFlightListByUserID(user.getUserID());
 		menu.setLength(0);
 		int count = 1;
@@ -301,7 +304,7 @@ public class Menu {
 	}
 	
 	public StringBuilder travelCancelBooking(Integer flightID) {
-		Service service = new Service();
+		ReadService service = new ReadService();
 		if(flightList.size() > 0 && flightID > 0) {
 			flight = service.getFlight(flightList.get(flightID-1)).get(0);
 			System.out.println(
