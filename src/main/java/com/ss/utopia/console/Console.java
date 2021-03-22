@@ -96,6 +96,7 @@ public class Console {
 										menu.travelViewFlight();
 										break;
 									case '2': //book flight
+										menu.travelBookFlight();
 										break;
 									case '3': //return to traveler
 										detail = false;

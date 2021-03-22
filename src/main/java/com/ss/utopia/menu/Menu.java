@@ -5,11 +5,16 @@ package com.ss.utopia.menu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import com.ss.utopia.entity.Booking;
+import com.ss.utopia.entity.BookingPayment;
+import com.ss.utopia.entity.BookingUser;
 import com.ss.utopia.entity.Flight;
+import com.ss.utopia.entity.FlightBookings;
+import com.ss.utopia.entity.Passenger;
 import com.ss.utopia.entity.User;
-import com.ss.utopia.services.EmployeeService;
-import com.ss.utopia.services.TravelerService;
+import com.ss.utopia.services.Service;
 
 /**
  * @author Christian Angeles
@@ -20,11 +25,13 @@ public class Menu {
 	private UserInput input;
 	private List<Flight> flightList;
 	private Flight flight;
+	private User user;
 
 	public Menu() {
 		menu = new StringBuilder();
 		input = new UserInput();
 		flightList = new ArrayList<>();
+		user = null;
 		flight = null;
 	}
 	
@@ -54,7 +61,7 @@ public class Menu {
 	}
 	
 	public StringBuilder empFlights() {
-		EmployeeService service = new EmployeeService();
+		Service service = new Service();
 		flightList = service.getFlightList();
 		menu.setLength(0);
 		int count = 1;
@@ -71,7 +78,7 @@ public class Menu {
 	}
 	
 	public StringBuilder empFlightDetail(Integer flightID) {
-		EmployeeService service = new EmployeeService();
+		Service service = new Service();
 		if(flightList.size() > 0) {
 			flight = service.getFlight(flightList.get(flightID-1)).get(0);
 			System.out.println(
@@ -111,7 +118,7 @@ public class Menu {
 	}
 	
 	public StringBuilder empUpdateFlight() {
-		EmployeeService service = new EmployeeService();
+		Service service = new Service();
 		MenuUtil util = new MenuUtil();
 		menu.setLength(0);
 		menu.append(
@@ -128,7 +135,7 @@ public class Menu {
 	}
 	
 	public StringBuilder empAddSeat() {
-		EmployeeService service = new EmployeeService();
+		Service service = new Service();
 		MenuUtil util = new MenuUtil();
 		System.out.println(
 				  "Reserve a seat for flight?\n"
@@ -143,14 +150,15 @@ public class Menu {
 	}
 	
 	public boolean checkMembership() {
-		TravelerService service = new TravelerService();
+		Service service = new Service();
 		List<User> userlist = new ArrayList<>();
 		userlist = service.getUserList();
 		System.out.println("Enter the your Membership Number:\n");
 		input.setInput();
 		int member = Integer.parseInt(input.getInput().toString());
-		for(User user: userlist) {
-			if(user.getUserID().equals(member)) {
+		for(User u: userlist) {
+			if(u.getUserID().equals(member)) {
+				user = u;
 				return true;
 			}
 		}
@@ -168,7 +176,7 @@ public class Menu {
 	}
 	
 	public StringBuilder travelFlights() {
-		TravelerService service = new TravelerService();
+		Service service = new Service();
 		flightList = service.getFlightList();
 		menu.setLength(0);
 		int count = 1;
@@ -186,7 +194,7 @@ public class Menu {
 	}
 	
 	public StringBuilder travelBooking(Integer flightID) {
-		TravelerService service = new TravelerService();
+		Service service = new Service();
 		if(flightList.size() > 0) {
 			flight = service.getFlight(flightList.get(flightID-1)).get(0);
 			System.out.println(
@@ -212,5 +220,60 @@ public class Menu {
 		System.out.println(menu);
 		input.setInput();
 		return input.getInput();
+	}
+	
+	public void travelBookFlight() {
+		Service service = new Service();
+		List<Booking> booklist = new ArrayList<>();
+		List<Passenger> passengerlist = new ArrayList<>();
+		Booking book = new Booking();
+		FlightBookings fbook = new FlightBookings();
+		BookingPayment bookp = new BookingPayment();
+		BookingUser booku = new BookingUser();
+		Passenger passenger = new Passenger();
+		
+		booklist = service.getBookingList();
+		if(booklist.size() > 0) {
+			book.setBookingID(booklist.size()+1);
+		}
+		else {
+			book.setBookingID(1);
+		}
+		book.setIsActive(1);
+		Integer rand = new Random().nextInt(10000)+1;
+		book.setConfirmCode(rand.toString());
+		
+		fbook.setBookingID(book.getBookingID());
+		fbook.setFlightID(flight.getFlightID());
+		
+		bookp.setBookingID(book);
+		bookp.setRefunded(0);
+		rand = new Random().nextInt(10000)+1;
+		bookp.setStripeID(rand.toString());
+		
+		booku.setBookingID(book.getBookingID());
+		booku.setUserID(user.getUserID());
+		
+		passengerlist = service.getPassengerList();
+		if(passengerlist.size() > 0) {
+			passenger.setPassengerID(passengerlist.size()+1);
+		}
+		else {
+			passenger.setPassengerID(1);
+		}
+		passenger.setBookingID(book);
+		passenger.setFamilyName(user.getFamilyName());
+		passenger.setGivenName(user.getGivenName());
+		System.out.println("Enter your address:\n");
+		input.setInput();
+		passenger.setAddress(input.getInput().toString());
+		System.out.println("Enter your gender:\n");
+		input.setInput();
+		passenger.setGender(input.getInput().toString());
+		System.out.println("Enter your date of birth:\n");
+		input.setInput();
+		passenger.setDob(input.getInput().toString());
+		
+		System.out.println("Book flight successful");
 	}
 }

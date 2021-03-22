@@ -3,8 +3,6 @@
  */
 package com.ss.utopia.entity;
 
-import java.sql.Timestamp;
-
 /**
  * @author Christian Angeles
  *
@@ -14,7 +12,7 @@ public class Passenger {
 	private Booking bookingID;
 	private String givenName;
 	private String familyName;
-	private Timestamp dob;
+	private String dob;
 	private String gender;
 	private String address;
 	/**
@@ -68,13 +66,13 @@ public class Passenger {
 	/**
 	 * @return the dob
 	 */
-	public Timestamp getDob() {
+	public String getDob() {
 		return dob;
 	}
 	/**
 	 * @param dob the dob to set
 	 */
-	public void setDob(Timestamp dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 	/**

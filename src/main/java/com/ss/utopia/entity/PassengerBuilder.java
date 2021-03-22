@@ -30,7 +30,7 @@ public class PassengerBuilder {
 		passenger.setBookingID(booking);
 		passenger.setGivenName(qresult.getString("given_name"));
 		passenger.setFamilyName(qresult.getString("family_name"));
-		passenger.setDob(qresult.getTimestamp("dob"));
+		passenger.setDob(qresult.getString("dob"));
 		passenger.setGender(qresult.getString("gender"));
 		passenger.setAddress(qresult.getString("address"));
 		
