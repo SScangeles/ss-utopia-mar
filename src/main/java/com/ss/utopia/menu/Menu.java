@@ -275,12 +275,29 @@ public class Menu {
 			System.out.println("Enter your date of birth:\n");
 			input.setInput();
 			passenger.setDob(input.getInput().toString());
-			System.out.println("Book flight successful");
 			
 			service.bookFlight(book, bookp, booku, passenger, fbook, flight);
 		}
 		else {
 			System.out.println("Book flight unsuccessful");
 		}
+	}
+	
+	public StringBuilder travelCancel() {
+		Service service = new Service();
+		List<Flight> flightList = new ArrayList<>();
+		flightList = service.getFlightListByUserID(user.getUserID());
+		menu.setLength(0);
+		int count = 1;
+		for(Flight flight: flightList) {
+			menu.append(count+") ");
+			menu.append(flight.getRoute().getOriginAirport().getAirportID()+", "+flight.getRoute().getOriginAirport().getCity()+" -> ");
+			menu.append(flight.getRoute().getDestAirport().getAirportID()+", "+flight.getRoute().getDestAirport().getCity()+"\n");
+			count++;
+		}
+		menu.append(count+") Return to previous\n");
+		System.out.println(menu);
+		input.setInput();
+		return input.getInput();
 	}
 }

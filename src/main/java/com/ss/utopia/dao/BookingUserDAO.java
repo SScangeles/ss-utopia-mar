@@ -54,6 +54,10 @@ public class BookingUserDAO extends BaseDAO<BookingUser> {
 				new Object[] {user.getUserID(), user.getBookingID()});
 	}
 	
+	public List<BookingUser> getBookingUserByUserID(Integer userID) throws SQLException {
+		return readData("select * from booking_user where user_id = ?", new Object[] {userID});
+	}
+	
 	public List<BookingUser> getAllBookingUser() throws SQLException {
 		return readData("select * from booking_user", null);
 	}

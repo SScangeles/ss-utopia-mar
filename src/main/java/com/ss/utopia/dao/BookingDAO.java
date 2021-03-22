@@ -27,9 +27,10 @@ public class BookingDAO extends BaseDAO<Booking> {
 		List<Booking> bookings = new ArrayList<>();
 		while(qresult.next()) {
 			Booking booking = new Booking();
-			booking.setBookingID(qresult.getInt("booking_id"));
+			booking.setBookingID(qresult.getInt("id"));
 			booking.setIsActive(qresult.getInt("is_active"));
 			booking.setConfirmCode(qresult.getString("confirmation_code"));
+			bookings.add(booking);
 		}
 		return bookings;
 	}

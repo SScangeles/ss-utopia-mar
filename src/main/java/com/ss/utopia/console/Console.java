@@ -114,6 +114,7 @@ public class Console {
 						}
 						break;
 					case '2': //go to booking list to cancel
+						menu.travelCancel();
 						break;
 					case '3': //return to utopia
 						travel = false;
