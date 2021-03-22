@@ -27,7 +27,14 @@ public class Console {
 					case '1': //go to flight list
 						boolean list = true;
 						while(list) {
-							int flightID = Integer.parseInt(menu.empFlights().toString());
+							int flightID = 0;
+							try {
+								flightID = Integer.parseInt(menu.empFlights().toString());
+							}
+							catch(NumberFormatException nfEx) {
+								System.out.println("NumberFormatException: "+nfEx.getMessage()+"\n");
+								break;
+							}
 							if(flightID <= menu.getFlightList().size()) {
 								//go to flight detail
 								boolean detail = true;
@@ -86,7 +93,14 @@ public class Console {
 					case '1': //go to flight list
 						boolean flightlist = true;
 						while(flightlist) {
-							int flightID = Integer.parseInt(menu.travelFlights().toString());
+							int flightID = 0;
+							try {
+								flightID = Integer.parseInt(menu.empFlights().toString());
+							}
+							catch(NumberFormatException nfEx) {
+								System.out.println("NumberFormatException: "+nfEx.getMessage()+"\n");
+								break;
+							}
 							if(flightID <= menu.getFlightList().size()) {
 								//go to flight detail to book
 								boolean flightdetail = true;
@@ -116,7 +130,14 @@ public class Console {
 					case '2': //go to booking list to cancel
 						boolean booklist = true;
 						while(booklist) {
-							int flightID = Integer.parseInt(menu.travelCancelList().toString());
+							int flightID = 0;
+							try {
+								flightID = Integer.parseInt(menu.empFlights().toString());
+							}
+							catch(NumberFormatException nfEx) {
+								System.out.println("NumberFormatException: "+nfEx.getMessage()+"\n");
+								break;
+							}
 							if(flightID <= menu.getFlightList().size()) {
 								//go to flight detail to book
 								boolean canceldetail = true;

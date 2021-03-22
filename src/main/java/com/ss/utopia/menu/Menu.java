@@ -79,7 +79,7 @@ public class Menu {
 	
 	public StringBuilder empFlightDetail(Integer flightID) {
 		Service service = new Service();
-		if(flightList.size() > 0) {
+		if(flightList.size() > 0 && flightID > 0) {
 			flight = service.getFlight(flightList.get(flightID-1)).get(0);
 			System.out.println(
 					  "1) View more details about the flight\n"
@@ -193,7 +193,7 @@ public class Menu {
 	
 	public StringBuilder travelBooking(Integer flightID) {
 		Service service = new Service();
-		if(flightList.size() > 0) {
+		if(flightList.size() > 0 && flightID > 0) {
 			flight = service.getFlight(flightList.get(flightID-1)).get(0);
 			System.out.println(
 					  "1) View flight details\n"
@@ -302,7 +302,7 @@ public class Menu {
 	
 	public StringBuilder travelCancelBooking(Integer flightID) {
 		Service service = new Service();
-		if(flightList.size() > 0) {
+		if(flightList.size() > 0 && flightID > 0) {
 			flight = service.getFlight(flightList.get(flightID-1)).get(0);
 			System.out.println(
 					  "1) View flight details\n"
@@ -311,5 +311,9 @@ public class Menu {
 			input.setInput();
 		}
 		return input.getInput();
+	}
+	
+	public void travelCancelFlight() {
+		
 	}
 }
