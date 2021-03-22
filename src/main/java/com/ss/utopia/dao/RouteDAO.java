@@ -38,8 +38,8 @@ public class RouteDAO extends BaseDAO<Route> {
 				+ "insert into route(id, origin_id, destination_id)\r\n"
 				+ "values (?, ?, ?);"
 				+ "set foreign_key_checks = 1;\r\n", 
-				new Object[] {route.getRouteID(), route.getOriginAirportID().getAirportID(), 
-						route.getDestAirportID().getAirportID()});
+				new Object[] {route.getRouteID(), route.getOriginAirport().getAirportID(), 
+						route.getDestAirport().getAirportID()});
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class RouteDAO extends BaseDAO<Route> {
 				+ "route.destination_id = ?,\r\n"
 				+ "where route.id = ?;\r\n"
 				+ "set foreign_key_checks = 1;", 
-				new Object[] {route.getOriginAirportID().getAirportID(), route.getDestAirportID().getAirportID(), 
+				new Object[] {route.getOriginAirport().getAirportID(), route.getDestAirport().getAirportID(), 
 						route.getRouteID()});
 	}
 	

@@ -38,8 +38,8 @@ public class FlightDAO extends BaseDAO<Flight> {
 				+ "insert into flight(id, route_id, airplane_id, departure_time)\r\n"
 				+ "values (?, ?, ?, ?);"
 				+ "set foreign_key_checks = 1;\r\n", 
-				new Object[] {flight.getFlightID(), flight.getRouteID().getRouteID(), 
-						flight.getAirplaneID().getAirplaneID(), flight.getDepartureTime()});
+				new Object[] {flight.getFlightID(), flight.getRoute().getRouteID(), 
+						flight.getAirplane().getAirplaneID(), flight.getDepartureTime()});
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class FlightDAO extends BaseDAO<Flight> {
 				+ "flight.departure_time = ?\r\n"
 				+ "where flight.id = ?;\r\n"
 				+ "set foreign_key_checks = 1;", 
-				new Object[] {flight.getRouteID().getRouteID(), flight.getAirplaneID().getAirplaneID(), 
+				new Object[] {flight.getRoute().getRouteID(), flight.getAirplane().getAirplaneID(), 
 						flight.getDepartureTime(), flight.getFlightID()});
 	}
 	

@@ -31,8 +31,8 @@ public class RouteBuilder {
 		airportDest.setCity(qresult.getString("destination_city"));
 		
 		route.setRouteID(qresult.getInt("route_id"));
-		route.setOriginAirportID(airportOrg);
-		route.setDestAirportID(airportDest);
+		route.setOriginAirport(airportOrg);
+		route.setDestAirport(airportDest);
 		
 		return route;
 	}

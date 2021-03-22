@@ -27,7 +27,7 @@ public class EmployeeService {
 	 * 
 	 * @return
 	 */
-	public List<Flight> getFlight() {
+	public List<Flight> getFlightList() {
 		try {
 			connection = serviceUtil.getConnection();
 			FlightDAO flightdao = new FlightDAO(connection);

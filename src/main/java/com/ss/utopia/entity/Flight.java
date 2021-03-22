@@ -11,8 +11,8 @@ import java.sql.Timestamp;
  */
 public class Flight {
 	private Integer flightID;
-	private Route routeID;
-	private Airplane airplaneID;
+	private Route route;
+	private Airplane airplane;
 	private Timestamp departureTime;
 	private Integer reservedSeats;
 	private Float seatPrice;
@@ -31,26 +31,26 @@ public class Flight {
 	/**
 	 * @return the routeID
 	 */
-	public Route getRouteID() {
-		return routeID;
+	public Route getRoute() {
+		return route;
 	}
 	/**
-	 * @param routeID the routeID to set
+	 * @param route the routeID to set
 	 */
-	public void setRouteID(Route routeID) {
-		this.routeID = routeID;
+	public void setRoute(Route route) {
+		this.route = route;
 	}
 	/**
 	 * @return the airplaneID
 	 */
-	public Airplane getAirplaneID() {
-		return airplaneID;
+	public Airplane getAirplane() {
+		return airplane;
 	}
 	/**
-	 * @param airplaneID the airplaneID to set
+	 * @param airplane the airplaneID to set
 	 */
-	public void setAirplaneID(Airplane airplaneID) {
-		this.airplaneID = airplaneID;
+	public void setAirplane(Airplane airplane) {
+		this.airplane = airplane;
 	}
 	/**
 	 * @return the departureTime
