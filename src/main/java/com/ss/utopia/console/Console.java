@@ -33,8 +33,7 @@ public class Console {
 								boolean detail = true;
 								while(detail) {
 									switch(menu.empFlightDetail(flightID).charAt(0)) {
-									case '1':
-										//go to view flight
+									case '1': //go to view flight
 										boolean view = true;
 										while(view) {
 											switch(menu.empViewFlight().charAt(0)) {
@@ -81,9 +80,46 @@ public class Console {
 				boolean admin = true;
 				break;
 			case '3': //go to traveler
-				boolean travel = true;
+				boolean travel = menu.checkMembership();
 				while(travel) {
-					
+					switch(menu.travelMenu().charAt(0)) {
+					case '1': //go to flight list
+						boolean list = true;
+						while(list) {
+							int flightID = Integer.parseInt(menu.travelFlights().toString());
+							if(flightID <= menu.getFlightList().size()) {
+								//go to flight detail to book
+								boolean detail = true;
+								while(detail) {
+									switch(menu.travelBooking(flightID).charAt(0)) {
+									case '1': //view flight detail
+										menu.travelViewFlight();
+										break;
+									case '2': //book flight
+										break;
+									case '3': //return to traveler
+										detail = false;
+										list = false;
+										break;
+									default:
+										break;
+									}
+								}
+							}
+							else if(flightID == menu.getFlightList().size()+1) {
+								//return to traveler
+								list = false;
+							}
+						}
+						break;
+					case '2': //go to booking list to cancel
+						break;
+					case '3': //return to utopia
+						travel = false;
+						break;
+					default:
+						break;
+					}
 				}
 				break;
 			case 'q': //quit utopia

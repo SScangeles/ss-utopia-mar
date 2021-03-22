@@ -126,7 +126,8 @@ public class MenuUtil {
 		System.out.println(menu);
 		
 		input.setInput();
-		if(Integer.parseInt(input.getInput().toString()) >= 0) {
+		int seat = Integer.parseInt(input.getInput().toString());
+		if( seat >= 0 && seat <= flight.getAirplane().getAirplaneTypeID().getMaxCap()) {
 			updateFlight.setFlightID(flight.getFlightID());
 			updateFlight.setRoute(flight.getRoute());
 			updateFlight.setAirplane(flight.getAirplane());

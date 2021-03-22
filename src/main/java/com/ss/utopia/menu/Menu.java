@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ss.utopia.entity.Flight;
+import com.ss.utopia.entity.User;
 import com.ss.utopia.services.EmployeeService;
+import com.ss.utopia.services.TravelerService;
 
 /**
  * @author Christian Angeles
@@ -140,7 +142,75 @@ public class Menu {
 		return input.getInput();
 	}
 	
+	public boolean checkMembership() {
+		TravelerService service = new TravelerService();
+		List<User> userlist = new ArrayList<>();
+		userlist = service.getUserList();
+		System.out.println("Enter the your Membership Number:\n");
+		input.setInput();
+		int member = Integer.parseInt(input.getInput().toString());
+		for(User user: userlist) {
+			if(user.getUserID().equals(member)) {
+				return true;
+			}
+		}
+		System.out.println("Membership Number not found.\n");
+		return false;
+	}
+	
 	public StringBuilder travelMenu() {
+		System.out.println(
+				  "1) Book a ticket\n"
+				+ "2) Cancel an upcoming trip\n"
+				+ "3) Return to previous\n");
+		input.setInput();
+		return input.getInput();
+	}
+	
+	public StringBuilder travelFlights() {
+		TravelerService service = new TravelerService();
+		flightList = service.getFlightList();
+		menu.setLength(0);
+		int count = 1;
+		System.out.println("Pick the flight you want to book a ticket for:\n");
+		for(Flight flight: flightList) {
+			menu.append(count+") ");
+			menu.append(flight.getRoute().getOriginAirport().getAirportID()+", "+flight.getRoute().getOriginAirport().getCity()+" -> ");
+			menu.append(flight.getRoute().getDestAirport().getAirportID()+", "+flight.getRoute().getDestAirport().getCity()+"\n");
+			count++;
+		}
+		menu.append(count+") Return to previous\n");
+		System.out.println(menu);
+		input.setInput();
+		return input.getInput();
+	}
+	
+	public StringBuilder travelBooking(Integer flightID) {
+		TravelerService service = new TravelerService();
+		if(flightList.size() > 0) {
+			flight = service.getFlight(flightList.get(flightID-1)).get(0);
+			System.out.println(
+					  "1) View flight details\n"
+					+ "2) Book this flight\n"
+					+ "3) Return to previous\n");
+			input.setInput();
+		}
+		return input.getInput();
+	}
+	
+	public StringBuilder travelViewFlight() {
+		menu.setLength(0);
+		menu.append(
+				  "You have chosen to view the Flight with Flight Id: "+flight.getFlightID()
+				+ " and Departure Airport: "+flight.getRoute().getOriginAirport().getCity()
+				+ " and Arrival Airport: "+flight.getRoute().getDestAirport().getCity()+".\n\n"
+				+ "Departure Airport: "+flight.getRoute().getOriginAirport().getAirportID()
+				+ " | Arrival Airport: "+flight.getRoute().getDestAirport().getAirportID()+" |\n"
+				+ "Departure Date: "+flight.getDepartureTime().toString().split(" ")[0]
+				+ " | Departure Time: "+flight.getDepartureTime().toString().split(" ")[1]+" |\n\n"
+				+ "Available Seats: "+(flight.getAirplane().getAirplaneTypeID().getMaxCap()-flight.getReservedSeats()));
+		System.out.println(menu);
+		input.setInput();
 		return input.getInput();
 	}
 }
