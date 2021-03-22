@@ -29,6 +29,7 @@ public class AirplaneTypeDAO extends BaseDAO<AirplaneType> {
 			AirplaneType type = new AirplaneType();
 			type.setAirplaneTypeID(qresult.getInt("id"));
 			type.setMaxCap(qresult.getInt("max_capacity"));
+			airplaneTypes.add(type);
 		}
 		return airplaneTypes;
 	}

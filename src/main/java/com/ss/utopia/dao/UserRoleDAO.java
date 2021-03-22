@@ -29,6 +29,7 @@ public class UserRoleDAO extends BaseDAO<UserRole> {
 			UserRole role = new UserRole();
 			role.setRoleID(qresult.getInt("id"));
 			role.setName(qresult.getString("name"));
+			roles.add(role);
 		}
 		return roles;
 	}

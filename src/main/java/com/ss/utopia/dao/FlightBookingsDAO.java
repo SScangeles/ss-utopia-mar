@@ -29,6 +29,7 @@ public class FlightBookingsDAO extends BaseDAO<FlightBookings> {
 			FlightBookings flightbook = new FlightBookings();
 			flightbook.setFlightID(qresult.getInt("flight_id"));
 			flightbook.setBookingID(qresult.getInt("booking_id"));
+			flightbooks.add(flightbook);
 		}
 		return flightbooks;
 	}

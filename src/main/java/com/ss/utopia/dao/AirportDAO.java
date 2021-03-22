@@ -30,6 +30,7 @@ public class AirportDAO extends BaseDAO<Airport> {
 			Airport airport = new Airport();
 			airport.setAirportID(qresult.getString("iata_id"));
 			airport.setCity(qresult.getString("city"));
+			airports.add(airport);
 		}
 		return airports;
 	}

@@ -283,7 +283,7 @@ public class Menu {
 		}
 	}
 	
-	public StringBuilder travelCancel() {
+	public StringBuilder travelCancelList() {
 		Service service = new Service();
 		List<Flight> flightList = new ArrayList<>();
 		flightList = service.getFlightListByUserID(user.getUserID());
