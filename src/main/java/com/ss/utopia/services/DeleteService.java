@@ -53,11 +53,11 @@ public class DeleteService {
 	 * @param airzplane
 	 * @return
 	 */
-	public boolean deleteAirzplane(Airplane airzplane) {
+	public boolean deleteAirplane(Airplane airplane) {
 		try {
 			connection = serviceUtil.getConnection();
 			AirplaneDAO dao = new AirplaneDAO(connection);
-			dao.delete(airzplane);
+			dao.delete(airplane);
 			connection.commit();
 			return true;
 		}

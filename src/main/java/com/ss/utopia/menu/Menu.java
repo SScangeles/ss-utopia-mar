@@ -325,4 +325,19 @@ public class Menu {
 	public void travelCancelFlight() {
 		
 	}
+	
+	public StringBuilder adminMenu() {
+		System.out.println(
+				  "1) Add/Update/Delete/Read Flights\n"
+				+ "2) Add/Update/Delete/Read Seats\n"
+				+ "3) Add/Update/Delete/Read Tickets and Passengers\n"
+				+ "4) Add/Update/Delete/Read Airports\n"
+				+ "5) Add/Update/Delete/Read Travelers\n"
+				+ "6) Add/Update/Delete/Read Employees\n"
+				+ "7) Over-ride Trip Cancellation for a ticket\n"
+				+ "8) Return to previous\n");
+		
+		input.setInput();
+		return input.getInput();
+	}
 }

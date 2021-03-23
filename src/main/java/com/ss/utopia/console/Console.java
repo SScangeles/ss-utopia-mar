@@ -85,6 +85,29 @@ public class Console {
 				break;
 			case '2': //go to admin
 				boolean admin = true;
+				while(admin) {
+					switch(menu.adminMenu().charAt(0)) {
+					case '1': //go to CRUD flight
+						break;
+					case '2': //go to CRUD seats
+						break;
+					case '3': //go to CRUD tickets and passengers
+						break;
+					case '4': //go to CRUD airports
+						break;
+					case '5': //go to CRUD travelers
+						break;
+					case '6': //go to CRUD employees
+						break;
+					case '7': //go to override trip-cancel
+						break;
+					case '8': //return to utopia
+						admin = false;
+						break;
+					default:
+						break;
+					}
+				}
 				break;
 			case '3': //go to traveler
 				boolean travel = menu.checkMembership();
@@ -147,6 +170,7 @@ public class Console {
 										menu.travelViewFlight();
 										break;
 									case '2': //cancel flight
+										menu.travelCancelFlight();
 										break;
 									case '3': //return to traveler
 										canceldetail = false;
