@@ -155,12 +155,18 @@ public class Menu {
 		userlist = service.getUserList();
 		System.out.println("Enter the your Membership Number:\n");
 		input.setInput();
-		int member = Integer.parseInt(input.getInput().toString());
-		for(User u: userlist) {
-			if(u.getUserID().equals(member)) {
-				user = u;
-				return true;
+		int member = 0;
+		try {
+			member = Integer.parseInt(input.getInput().toString());
+			for(User u: userlist) {
+				if(u.getUserID().equals(member)) {
+					user = u;
+					return true;
+				}
 			}
+		}
+		catch(NumberFormatException nfEx) {
+			System.out.println("NumberFormatException: "+nfEx.getMessage()+"\n");
 		}
 		System.out.println("Membership Number not found.\n");
 		return false;
