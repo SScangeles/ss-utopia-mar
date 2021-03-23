@@ -11,13 +11,13 @@ import java.sql.SQLException;
  * @author Christian Angeles
  *
  */
-public class UtilityService {
+public class ServiceUtil {
 	private final String driver;
 	private final String url;
 	private final String username;
 	private final String password;
 	
-	public UtilityService() {
+	public ServiceUtil() {
 		driver = "com.mysql.cj.jdbc.Driver";
 		url = "jdbc:mysql://localhost:3306/utopia";
 		username = "root";

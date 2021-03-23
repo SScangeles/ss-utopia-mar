@@ -26,13 +26,129 @@ import com.ss.utopia.entity.Route;
  *
  */
 public class UpdateService {
-	private UtilityService serviceUtil;
+	private ServiceUtil serviceUtil;
 	private Connection connection;
 	
 	public UpdateService() {
-		serviceUtil = new UtilityService();
+		serviceUtil = new ServiceUtil();
 		connection = null;
 	}
+	// Airplane DAO
+	
+	// AirplaneType DAO
+	
+	// Airport DAO
+	
+	// Booking DAO
+	/**
+	 * 
+	 * @param booking
+	 */
+	public void updateBooking(Booking booking) {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingDAO bookingdao = new BookingDAO(connection);
+			bookingdao.update(booking);
+			connection.commit();
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
+	// BookingAgent DAO
+	
+	// BookingGuest DAO
+	
+	// BookingPayment DAO
+	/**
+	 * 
+	 * @param bookingpayment
+	 */
+	public void updateBookingPayment(BookingPayment bookingpayment) {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingPaymentDAO bookingpaymentdao = new BookingPaymentDAO(connection);
+			bookingpaymentdao.update(bookingpayment);
+			connection.commit();
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
+	// BookingUser DAO
+	/**
+	 * 
+	 * @param bookinguser
+	 */
+	public void updateBookingUser(BookingUser bookinguser) {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingUserDAO bookinguserdao = new BookingUserDAO(connection);
+			bookinguserdao.update(bookinguser);
+			connection.commit();
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
+	// Flight DAO
 	/**
 	 * 
 	 * @param flight
@@ -102,72 +218,8 @@ public class UpdateService {
 			}
 		}
 	}
-	/**
-	 * 
-	 * @param route
-	 */
-	public void updateRoute(Route route) {
-		try {
-			connection = serviceUtil.getConnection();
-			RouteDAO routedao = new RouteDAO(connection);
-			routedao.update(route);
-			connection.commit();
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			System.out.println("Exception: "+e.getMessage());
-			if(connection != null) {
-				try {
-					connection.rollback();
-				}
-				catch(SQLException rollEx) {
-					System.out.println("SQLException: "+rollEx.getMessage());
-				}
-			}
-		}
-		finally {
-			if(connection != null) {
-				try {
-					connection.close();
-				}
-				catch(SQLException closeEx) {
-					System.out.println("SQLException: "+closeEx.getMessage());
-				}
-			}
-		}
-	}
-	/**
-	 * 
-	 * @param booking
-	 */
-	public void updateBooking(Booking booking) {
-		try {
-			connection = serviceUtil.getConnection();
-			BookingDAO bookingdao = new BookingDAO(connection);
-			bookingdao.update(booking);
-			connection.commit();
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			System.out.println("Exception: "+e.getMessage());
-			if(connection != null) {
-				try {
-					connection.rollback();
-				}
-				catch(SQLException rollEx) {
-					System.out.println("SQLException: "+rollEx.getMessage());
-				}
-			}
-		}
-		finally {
-			if(connection != null) {
-				try {
-					connection.close();
-				}
-				catch(SQLException closeEx) {
-					System.out.println("SQLException: "+closeEx.getMessage());
-				}
-			}
-		}
-	}
+	
+	// FlightBooking DAO
 	/**
 	 * 
 	 * @param flightbooking
@@ -201,72 +253,8 @@ public class UpdateService {
 			}
 		}
 	}
-	/**
-	 * 
-	 * @param bookinguser
-	 */
-	public void updateBookingUser(BookingUser bookinguser) {
-		try {
-			connection = serviceUtil.getConnection();
-			BookingUserDAO bookinguserdao = new BookingUserDAO(connection);
-			bookinguserdao.update(bookinguser);
-			connection.commit();
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			System.out.println("Exception: "+e.getMessage());
-			if(connection != null) {
-				try {
-					connection.rollback();
-				}
-				catch(SQLException rollEx) {
-					System.out.println("SQLException: "+rollEx.getMessage());
-				}
-			}
-		}
-		finally {
-			if(connection != null) {
-				try {
-					connection.close();
-				}
-				catch(SQLException closeEx) {
-					System.out.println("SQLException: "+closeEx.getMessage());
-				}
-			}
-		}
-	}
-	/**
-	 * 
-	 * @param bookingpayment
-	 */
-	public void updateBookingPayment(BookingPayment bookingpayment) {
-		try {
-			connection = serviceUtil.getConnection();
-			BookingPaymentDAO bookingpaymentdao = new BookingPaymentDAO(connection);
-			bookingpaymentdao.update(bookingpayment);
-			connection.commit();
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			System.out.println("Exception: "+e.getMessage());
-			if(connection != null) {
-				try {
-					connection.rollback();
-				}
-				catch(SQLException rollEx) {
-					System.out.println("SQLException: "+rollEx.getMessage());
-				}
-			}
-		}
-		finally {
-			if(connection != null) {
-				try {
-					connection.close();
-				}
-				catch(SQLException closeEx) {
-					System.out.println("SQLException: "+closeEx.getMessage());
-				}
-			}
-		}
-	}
+	
+	// Passenger DAO
 	/**
 	 * 
 	 * @param passenger
@@ -300,4 +288,44 @@ public class UpdateService {
 			}
 		}
 	}
+	
+	// Route DAO
+	/**
+	 * 
+	 * @param route
+	 */
+	public void updateRoute(Route route) {
+		try {
+			connection = serviceUtil.getConnection();
+			RouteDAO routedao = new RouteDAO(connection);
+			routedao.update(route);
+			connection.commit();
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
+	// User DAO
+	
+	// UserRole DAO
+	
 }

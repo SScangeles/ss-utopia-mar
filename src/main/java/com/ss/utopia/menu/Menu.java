@@ -124,7 +124,7 @@ public class Menu {
 		menu.setLength(0);
 		menu.append(
 				"You have chosen to update the Flight with Flight Id: "+flight.getFlightID()
-				+ "and Flight Origin: "+flight.getRoute().getOriginAirport().getAirportID()
+				+ " and Flight Origin: "+flight.getRoute().getOriginAirport().getAirportID()
 				+ " and Flight Destination: "+flight.getRoute().getDestAirport().getAirportID()+".\n"
 				+ "Enter ‘quit’ at any prompt to cancel operation.\n");
 		System.out.println(menu);
@@ -279,7 +279,7 @@ public class Menu {
 			input.setInput();
 			passenger.setDob(input.getInput().toString());
 			
-			cservice.insertBookFlight(book, bookp, booku, passenger, fbook, flight);
+			cservice.insertTravelerBookFlight(book, bookp, booku, passenger, fbook, flight);
 		}
 		else {
 			System.out.println("Book flight unsuccessful");

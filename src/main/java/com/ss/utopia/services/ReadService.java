@@ -26,13 +26,109 @@ import com.ss.utopia.entity.User;
  *
  */
 public class ReadService {
-	private UtilityService serviceUtil;
+	private ServiceUtil serviceUtil;
 	private Connection connection;
 	
 	public ReadService() {
-		serviceUtil = new UtilityService();
+		serviceUtil = new ServiceUtil();
 		connection = null;
 	}
+	// Airplane DAO
+	
+	// AirplaneType DAO
+	
+	// Airport DAO
+	
+	// Booking DAO
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Booking> getBookingList() {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingDAO bookingdao = new BookingDAO(connection);
+			
+			return bookingdao.getAllBooking();
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
+			return new ArrayList<>();
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
+	// BookingAgent DAO
+	
+	// BookingGuest DAO
+	
+	// BookingPayment DAO
+	
+	// BookingUser DAO
+	/**
+	 * 
+	 * @return
+	 */
+	public List<BookingUser> getBookingUserList() {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingUserDAO bookinguserdao = new BookingUserDAO(connection);
+			
+			return bookinguserdao.getAllBookingUser();
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
+			return new ArrayList<>();
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	/**
+	 * 
+	 * @param userID
+	 * @return
+	 */
+	public List<BookingUser> getBookingUserByUserID(Integer userID) {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingUserDAO bookinguserdao = new BookingUserDAO(connection);
+			
+			return bookinguserdao.getBookingUserByUserID(userID);
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
+			return new ArrayList<>();
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
+	// Flight DAO
 	/**
 	 * 
 	 * @return
@@ -113,58 +209,8 @@ public class ReadService {
 			}
 		}
 	}
-	/**
-	 * 
-	 * @return
-	 */
-	public List<User> getUserList() {
-		try {
-			connection = serviceUtil.getConnection();
-			UserDAO userdao = new UserDAO(connection);
-			
-			return userdao.getAllUser();
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			System.out.println("Exception: "+e.getMessage());
-			return new ArrayList<User>();
-		}
-		finally {
-			if(connection != null) {
-				try {
-					connection.close();
-				}
-				catch(SQLException closeEx) {
-					System.out.println("SQLException: "+closeEx.getMessage());
-				}
-			}
-		}
-	}
-	/**
-	 * 
-	 * @return
-	 */
-	public List<Booking> getBookingList() {
-		try {
-			connection = serviceUtil.getConnection();
-			BookingDAO bookingdao = new BookingDAO(connection);
-			
-			return bookingdao.getAllBooking();
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			System.out.println("Exception: "+e.getMessage());
-			return new ArrayList<>();
-		}
-		finally {
-			if(connection != null) {
-				try {
-					connection.close();
-				}
-				catch(SQLException closeEx) {
-					System.out.println("SQLException: "+closeEx.getMessage());
-				}
-			}
-		}
-	}
+	
+	// FlightBooking DAO
 	/**
 	 * 
 	 * @return
@@ -191,59 +237,8 @@ public class ReadService {
 			}
 		}
 	}
-	/**
-	 * 
-	 * @return
-	 */
-	public List<BookingUser> getBookingUserList() {
-		try {
-			connection = serviceUtil.getConnection();
-			BookingUserDAO bookinguserdao = new BookingUserDAO(connection);
-			
-			return bookinguserdao.getAllBookingUser();
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			System.out.println("Exception: "+e.getMessage());
-			return new ArrayList<>();
-		}
-		finally {
-			if(connection != null) {
-				try {
-					connection.close();
-				}
-				catch(SQLException closeEx) {
-					System.out.println("SQLException: "+closeEx.getMessage());
-				}
-			}
-		}
-	}
-	/**
-	 * 
-	 * @param userID
-	 * @return
-	 */
-	public List<BookingUser> getBookingUserByUserID(Integer userID) {
-		try {
-			connection = serviceUtil.getConnection();
-			BookingUserDAO bookinguserdao = new BookingUserDAO(connection);
-			
-			return bookinguserdao.getBookingUserByUserID(userID);
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			System.out.println("Exception: "+e.getMessage());
-			return new ArrayList<>();
-		}
-		finally {
-			if(connection != null) {
-				try {
-					connection.close();
-				}
-				catch(SQLException closeEx) {
-					System.out.println("SQLException: "+closeEx.getMessage());
-				}
-			}
-		}
-	}
+	
+	// Passenger DAO
 	/**
 	 * 
 	 * @return
@@ -270,4 +265,36 @@ public class ReadService {
 			}
 		}
 	}
+	
+	// Route DAO
+	
+	// User DAO
+	/**
+	 * 
+	 * @return
+	 */
+	public List<User> getUserList() {
+		try {
+			connection = serviceUtil.getConnection();
+			UserDAO userdao = new UserDAO(connection);
+			
+			return userdao.getAllUser();
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
+			return new ArrayList<User>();
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
+	// UserRole DAO
 }

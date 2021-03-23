@@ -24,13 +24,20 @@ import com.ss.utopia.entity.Passenger;
  *
  */
 public class CreateService {
-	private UtilityService serviceUtil;
+	private ServiceUtil serviceUtil;
 	private Connection connection;
 	
 	public CreateService() {
-		serviceUtil = new UtilityService();
+		serviceUtil = new ServiceUtil();
 		connection = null;
 	}
+	// Airplane DAO
+	
+	// AirplaneType DAO
+	
+	// Airport DAO
+	
+	// Booking DAO
 	/**
 	 * 
 	 * @param booking
@@ -64,72 +71,12 @@ public class CreateService {
 			}
 		}
 	}
-	/**
-	 * 
-	 * @param flightbooking
-	 */
-	public void insertFlightBooking(FlightBookings flightbooking) {
-		try {
-			connection = serviceUtil.getConnection();
-			FlightBookingsDAO flightbookingdao = new FlightBookingsDAO(connection);
-			flightbookingdao.insert(flightbooking);
-			connection.commit();
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			System.out.println("Exception: "+e.getMessage());
-			if(connection != null) {
-				try {
-					connection.rollback();
-				}
-				catch(SQLException rollEx) {
-					System.out.println("SQLException: "+rollEx.getMessage());
-				}
-			}
-		}
-		finally {
-			if(connection != null) {
-				try {
-					connection.close();
-				}
-				catch(SQLException closeEx) {
-					System.out.println("SQLException: "+closeEx.getMessage());
-				}
-			}
-		}
-	}
-	/**
-	 * 
-	 * @param bookinguser
-	 */
-	public void insertBookingUser(BookingUser bookinguser) {
-		try {
-			connection = serviceUtil.getConnection();
-			BookingUserDAO bookinguserdao = new BookingUserDAO(connection);
-			bookinguserdao.insert(bookinguser);
-			connection.commit();
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			System.out.println("Exception: "+e.getMessage());
-			if(connection != null) {
-				try {
-					connection.rollback();
-				}
-				catch(SQLException rollEx) {
-					System.out.println("SQLException: "+rollEx.getMessage());
-				}
-			}
-		}
-		finally {
-			if(connection != null) {
-				try {
-					connection.close();
-				}
-				catch(SQLException closeEx) {
-					System.out.println("SQLException: "+closeEx.getMessage());
-				}
-			}
-		}
-	}
+	
+	// BookingAgent DAO
+	
+	// BookingGuest DAO
+	
+	// BookingPayment DAO
 	/**
 	 * 
 	 * @param bookingpayment
@@ -163,6 +110,80 @@ public class CreateService {
 			}
 		}
 	}
+	
+	// BookingUser DAO
+	/**
+	 * 
+	 * @param bookinguser
+	 */
+	public void insertBookingUser(BookingUser bookinguser) {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingUserDAO bookinguserdao = new BookingUserDAO(connection);
+			bookinguserdao.insert(bookinguser);
+			connection.commit();
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
+	// Flight DAO
+	
+	// FlightBooking DAO
+	/**
+	 * 
+	 * @param flightbooking
+	 */
+	public void insertFlightBooking(FlightBookings flightbooking) {
+		try {
+			connection = serviceUtil.getConnection();
+			FlightBookingsDAO flightbookingdao = new FlightBookingsDAO(connection);
+			flightbookingdao.insert(flightbooking);
+			connection.commit();
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
+	
+	// Passenger DAO
 	/**
 	 * 
 	 * @param passenger
@@ -196,6 +217,14 @@ public class CreateService {
 			}
 		}
 	}
+	
+	// Route DAO
+	
+	// User DAO
+	
+	// UserRole DAO
+	
+	// Traveler
 	/**
 	 * 
 	 * @param booking
@@ -205,7 +234,7 @@ public class CreateService {
 	 * @param flightbook
 	 * @param flight
 	 */
-	public void insertBookFlight(Booking booking, BookingPayment bookpay, BookingUser bookuser, 
+	public void insertTravelerBookFlight(Booking booking, BookingPayment bookpay, BookingUser bookuser, 
 			Passenger passenger, FlightBookings flightbook, Flight flight) {
 		try {
 			connection = serviceUtil.getConnection();
