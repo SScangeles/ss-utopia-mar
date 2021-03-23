@@ -375,44 +375,6 @@ public class UpdateService {
 			}
 		}
 	}
-	/**
-	 * 
-	 * @param flight
-	 * @param route
-	 */
-	public boolean updateFlight(Flight flight, Route route) {
-		try {
-			connection = serviceUtil.getConnection();
-			FlightDAO flightdao = new FlightDAO(connection);
-			RouteDAO routedao = new RouteDAO(connection);
-			routedao.update(route);
-			flightdao.update(flight);
-			connection.commit();
-			return true;
-		}
-		catch(ClassNotFoundException | SQLException e) {
-			System.out.println("Exception: "+e.getMessage());
-			if(connection != null) {
-				try {
-					connection.rollback();
-				}
-				catch(SQLException rollEx) {
-					System.out.println("SQLException: "+rollEx.getMessage());
-				}
-			}
-			return false;
-		}
-		finally {
-			if(connection != null) {
-				try {
-					connection.close();
-				}
-				catch(SQLException closeEx) {
-					System.out.println("SQLException: "+closeEx.getMessage());
-				}
-			}
-		}
-	}
 	
 	// FlightBooking DAO
 	/**

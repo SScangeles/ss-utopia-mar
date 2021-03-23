@@ -14,8 +14,9 @@ import com.ss.utopia.entity.Flight;
 import com.ss.utopia.entity.FlightBookings;
 import com.ss.utopia.entity.Passenger;
 import com.ss.utopia.entity.User;
-import com.ss.utopia.services.CreateService;
+import com.ss.utopia.services.EmployeeService;
 import com.ss.utopia.services.ReadService;
+import com.ss.utopia.services.TravelerService;
 import com.ss.utopia.services.UpdateService;
 
 /**
@@ -43,7 +44,10 @@ public class Menu {
 	public List<Flight> getFlightList() {
 		return this.flightList;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder utopiaMenu() {
 		System.out.println(
 				  "Welcome to the Utopia Airlines Management System. Which category of a user are you:\n"
@@ -53,7 +57,10 @@ public class Menu {
 		input.setInput();
 		return input.getInput();
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder empMenu() {
 		System.out.println(
 				  "1) Enter flights you manage\n"
@@ -61,7 +68,10 @@ public class Menu {
 		input.setInput();
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder empFlights() {
 		ReadService service = new ReadService();
 		flightList = service.getFlightList();
@@ -78,7 +88,11 @@ public class Menu {
 		input.setInput();
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 * @param flightID
+	 * @return
+	 */
 	public StringBuilder empFlightDetail(Integer flightID) {
 		ReadService service = new ReadService();
 		if(flightList.size() > 0 && flightID > 0) {
@@ -92,7 +106,10 @@ public class Menu {
 		}
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder empViewFlight() {
 		menu.setLength(0);
 		menu.append(
@@ -110,16 +127,22 @@ public class Menu {
 		input.setInput();
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder empCheckSeats() {
 		menu.setLength(0);
 		menu.append("Reserved seats: "+flight.getReservedSeats()+"\n");
 		System.out.println(menu);
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder empUpdateFlight() {
-		UpdateService service = new UpdateService();
+		EmployeeService service = new EmployeeService();
 		MenuUtil util = new MenuUtil();
 		menu.setLength(0);
 		menu.append(
@@ -129,11 +152,14 @@ public class Menu {
 				+ "Enter ‘quit’ at any prompt to cancel operation.\n");
 		System.out.println(menu);
 		flight = util.empUpdateFlightUtil(flight);
-		service.updateFlight(flight, flight.getRoute());
+		service.updateFlightRoute(flight, flight.getRoute());
 		
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder empAddSeat() {
 		UpdateService service = new UpdateService();
 		MenuUtil util = new MenuUtil();
@@ -148,7 +174,10 @@ public class Menu {
 		}
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean checkMembership() {
 		ReadService service = new ReadService();
 		List<User> userlist = new ArrayList<>();
@@ -171,7 +200,10 @@ public class Menu {
 		System.out.println("Membership Number not found.\n");
 		return false;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder travelMenu() {
 		System.out.println(
 				  "1) Book a ticket\n"
@@ -180,7 +212,10 @@ public class Menu {
 		input.setInput();
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder travelFlights() {
 		ReadService service = new ReadService();
 		flightList = service.getFlightList();
@@ -198,7 +233,11 @@ public class Menu {
 		input.setInput();
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 * @param flightID
+	 * @return
+	 */
 	public StringBuilder travelBooking(Integer flightID) {
 		ReadService service = new ReadService();
 		if(flightList.size() > 0 && flightID > 0) {
@@ -211,7 +250,10 @@ public class Menu {
 		}
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder travelViewFlight() {
 		menu.setLength(0);
 		menu.append(
@@ -227,10 +269,12 @@ public class Menu {
 		input.setInput();
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 */
 	public void travelBookFlight() {
-		ReadService rservice = new ReadService();
-		CreateService cservice = new CreateService();
+		ReadService service = new ReadService();
+		TravelerService tservice = new TravelerService();
 		List<Booking> booklist = new ArrayList<>();
 		List<Passenger> passengerlist = new ArrayList<>();
 		Booking book = new Booking();
@@ -243,7 +287,7 @@ public class Menu {
 		if(flight.getReservedSeats() < flight.getAirplane().getAirplaneTypeID().getMaxCap()) {
 			flight.setReservedSeats(flight.getReservedSeats()+1);
 
-			booklist = rservice.getBookingList();
+			booklist = service.getBookingList();
 			if(booklist.size() > 0) {
 				book.setBookingID(booklist.size()+1);
 			}
@@ -265,7 +309,7 @@ public class Menu {
 			booku.setBookingID(book.getBookingID());
 			booku.setUserID(user.getUserID());
 			
-			passengerlist = rservice.getPassengerList();
+			passengerlist = service.getPassengerList();
 			if(passengerlist.size() > 0) {
 				passenger.setPassengerID(passengerlist.size()+1);
 			}
@@ -285,13 +329,16 @@ public class Menu {
 			input.setInput();
 			passenger.setDob(input.getInput().toString());
 			
-			cservice.insertTravelerBookFlight(book, bookp, booku, passenger, fbook, flight);
+			tservice.addBookedFlight(book, bookp, booku, passenger, fbook, flight);
 		}
 		else {
 			System.out.println("Book flight unsuccessful");
 		}
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder travelCancelList() {
 		ReadService service = new ReadService();
 		flightList = service.getFlightListByUserID(user.getUserID());
@@ -308,7 +355,11 @@ public class Menu {
 		input.setInput();
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 * @param flightID
+	 * @return
+	 */
 	public StringBuilder travelCancelBooking(Integer flightID) {
 		ReadService service = new ReadService();
 		if(flightList.size() > 0 && flightID > 0) {
@@ -321,11 +372,19 @@ public class Menu {
 		}
 		return input.getInput();
 	}
-	
+	/**
+	 * 
+	 */
 	public void travelCancelFlight() {
-		
+		//update booking isActive = 0
+		//update booking payment refunded = 1
+		//delete flight booking for booking id
+		//update flight reserved seats
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public StringBuilder adminMenu() {
 		System.out.println(
 				  "1) Add/Update/Delete/Read Flights\n"
@@ -334,7 +393,7 @@ public class Menu {
 				+ "4) Add/Update/Delete/Read Airports\n"
 				+ "5) Add/Update/Delete/Read Travelers\n"
 				+ "6) Add/Update/Delete/Read Employees\n"
-				+ "7) Over-ride Trip Cancellation for a ticket\n"
+				+ "7) Override Trip Cancellation for a ticket\n"
 				+ "8) Return to previous\n");
 		
 		input.setInput();
