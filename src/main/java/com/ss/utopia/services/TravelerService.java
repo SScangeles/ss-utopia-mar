@@ -83,5 +83,37 @@ public class TravelerService {
 			}
 		}
 	}
-
+	public boolean cancelFlight(Booking book, BookingPayment payment, FlightBookings flightbook, Flight flight) {
+		try {
+			connection = serviceUtil.getConnection();
+			BookingDAO bookdao = new BookingDAO(connection);
+			BookingPaymentDAO paymentdao = new BookingPaymentDAO(connection);
+			FlightBookingsDAO flightbookdao = new FlightBookingsDAO(connection);
+			FlightDAO flightdao = new FlightDAO(connection);
+			connection.commit();
+			return true;
+		}
+		catch(ClassNotFoundException | SQLException e) {
+			System.out.println("Exception: "+e.getMessage());
+			if(connection != null) {
+				try {
+					connection.rollback();
+				}
+				catch(SQLException rollEx) {
+					System.out.println("SQLException: "+rollEx.getMessage());
+				}
+			}
+			return false;
+		}
+		finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				}
+				catch(SQLException closeEx) {
+					System.out.println("SQLException: "+closeEx.getMessage());
+				}
+			}
+		}
+	}
 }
